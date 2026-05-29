@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lee 的法语口语老师 · Steven</title>
+<style>
+  :root{
+    --bg:#faf7f2; --ink:#2b2a27; --sub:#6b6863; --line:#e6e1d8;
+    --accent:#c4623a; --accent-soft:#f4e3d8; --good:#3f7a4f; --bad:#b54848;
+    --card:#fff; --shadow:0 1px 3px rgba(0,0,0,.05),0 4px 12px rgba(0,0,0,.04);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"PingFang SC","Helvetica Neue",sans-serif;font-size:15px;line-height:1.55}
+  header{padding:18px 24px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;background:#fff}
+  header h1{margin:0;font-size:18px;font-weight:600}
+  header .sub{color:var(--sub);font-size:13px}
+  nav{display:flex;gap:4px;margin-left:auto}
+  nav button{background:transparent;border:1px solid transparent;color:var(--sub);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px}
+  nav button.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent-soft)}
+  main{max-width:920px;margin:0 auto;padding:20px}
+  .panel{display:none}
+  .panel.active{display:block}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .card h3{margin:0 0 10px;font-size:15px}
+  label{display:block;margin:8px 0 4px;color:var(--sub);font-size:13px}
+  input[type=text],input[type=password],select,textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:6px;font-size:14px;font-family:inherit;background:#fff;color:var(--ink)}
+  textarea{resize:vertical;min-height:64px}
+  button.primary{background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:500}
+  button.primary:hover{filter:brightness(.95)}
+  button.primary:disabled{opacity:.5;cursor:not-allowed}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:13px}
+  button.ghost:hover{background:#f5f1ea}
+  .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .scenario-banner{background:linear-gradient(135deg,var(--accent-soft),#fff);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+  .scenario-banner .role{color:var(--accent);font-weight:600;font-size:13px;margin-bottom:4px}
+  .scenario-banner .ctx{font-size:14px;color:var(--ink)}
+  .scenario-banner .obj{color:var(--sub);font-size:13px;margin-top:6px}
+  #chat{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;min-height:320px;max-height:55vh;overflow-y:auto;margin-bottom:12px}
+  .msg{margin-bottom:14px;display:flex;gap:10px}
+  .msg .who{flex:0 0 56px;font-size:12px;color:var(--sub);padding-top:4px}
+  .msg .body{flex:1;background:#f7f3ec;padding:9px 12px;border-radius:8px}
+  .msg.me .body{background:var(--accent-soft)}
+  .msg .feedback{margin-top:8px;padding:8px 10px;background:#f0f6f1;border-left:3px solid var(--good);border-radius:4px;font-size:13px}
+  .msg .feedback.has-error{background:#fdf2f2;border-color:var(--bad)}
+  .msg .feedback .corrected{color:var(--good);font-weight:500}
+  .msg .feedback.has-error .corrected{color:var(--bad)}
+  .msg .feedback .note{color:var(--sub);margin-top:4px;font-size:12px}
+  .msg .play{background:none;border:none;color:var(--sub);cursor:pointer;font-size:12px;padding:2px 6px;margin-left:6px}
+  .msg .play:hover{color:var(--accent)}
+  .suggestions{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+  .suggestions .label{font-size:11px;color:var(--sub);text-transform:uppercase;letter-spacing:.5px}
+  .sug{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;transition:all .15s}
+  .sug:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .sug .fr{flex:1;font-size:14px}
+  .sug .zh{color:var(--sub);font-size:12px;margin-top:3px}
+  .sug .play-sug{background:none;border:none;color:var(--sub);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0}
+  .sug .play-sug:hover{color:var(--accent)}
+  .input-bar{display:flex;gap:8px;align-items:flex-end}
+  .input-bar textarea{flex:1}
+  .mic{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center}
+  .mic.recording{background:var(--bad);color:#fff;border-color:var(--bad);animation:pulse 1.2s infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .scenario-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+  .sc-item{background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px;cursor:pointer;font-size:13px;transition:all .15s}
+  .sc-item:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .sc-item .role{color:var(--accent);font-size:12px;font-weight:600;margin-bottom:3px}
+  .sc-item .desc{color:var(--ink)}
+  .vocab-list{display:flex;flex-wrap:wrap;gap:8px}
+  .vocab-tag{background:#fff;border:1px solid var(--line);padding:5px 10px;border-radius:14px;font-size:13px;cursor:pointer}
+  .vocab-tag:hover{background:var(--accent-soft);border-color:var(--accent)}
+  .empty{color:var(--sub);text-align:center;padding:30px;font-size:13px}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;z-index:100;opacity:0;transition:opacity .2s}
+  .toast.show{opacity:1}
+  small.hint{color:var(--sub);font-size:12px}
+  details{margin-top:8px}
+  summary{cursor:pointer;color:var(--sub);font-size:12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Steven · 法语口语老师</h1>
+    <div class="sub">基于你工作中的真实场景 · 每天针对性练习</div>
+  </div>
+  <nav>
+    <button data-tab="practice" class="active">今日对话</button>
+    <button data-tab="scenarios">场景库</button>
+    <button data-tab="vocab">词汇本</button>
+    <button data-tab="import">导入聊天</button>
+    <button data-tab="settings">设置</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ========== PRACTICE ========== -->
+<section class="panel active" id="practice">
+  <div class="scenario-banner" id="banner">
+    <div class="role" id="banner-role">…</div>
+    <div class="ctx" id="banner-ctx">点击下方"开始今日对话"加载场景</div>
+    <div class="obj" id="banner-obj"></div>
+  </div>
+
+  <div class="row" style="margin-bottom:12px">
+    <button class="primary" id="btn-start">开始今日对话</button>
+    <button class="ghost" id="btn-newscene">换一个场景</button>
+    <label style="margin:0 0 0 auto;display:flex;align-items:center;gap:6px;color:var(--sub);font-size:13px">
+      <input type="checkbox" id="autoplay" checked> 自动朗读 AI 回复
+    </label>
+  </div>
+
+  <div id="chat"></div>
+
+  <div class="input-bar">
+    <textarea id="input" placeholder="用法语回复（或点麦克风用说的）…  Shift+Enter 换行，Enter 发送" rows="2"></textarea>
+    <button class="mic" id="mic" title="按住说话 / 点击切换">🎤</button>
+    <button class="primary" id="send">发送</button>
+  </div>
+  <small class="hint">麦克风用浏览器原生语音识别（fr-FR），完全免费。第一次使用浏览器会请求麦克风权限。</small>
+</section>
+
+<!-- ========== SCENARIOS ========== -->
+<section class="panel" id="scenarios">
+  <div class="card">
+    <h3>场景库 <small class="hint" id="sc-count"></small></h3>
+    <p style="color:var(--sub);font-size:13px;margin:0 0 12px">点击任意场景立即开始 roleplay。这些来自你的真实工作记录，导入新聊天会自动追加。</p>
+    <div class="scenario-list" id="sc-list"></div>
+  </div>
+</section>
+
+<!-- ========== VOCAB ========== -->
+<section class="panel" id="vocab">
+  <div class="card">
+    <h3>词汇本 <small class="hint" id="vc-count"></small></h3>
+    <p style="color:var(--sub);font-size:13px;margin:0 0 12px">AI 帮你纠错时的关键词会自动收集到这里。点击查看用例。</p>
+    <div class="vocab-list" id="vc-list"></div>
+    <div class="empty" id="vc-empty">还没有积累词汇，先去练习一段对话吧。</div>
+  </div>
+</section>
+
+<!-- ========== IMPORT ========== -->
+<section class="panel" id="import">
+  <div class="card">
+    <h3>导入新的 WhatsApp 聊天记录</h3>
+    <p style="color:var(--sub);font-size:13px">
+      WhatsApp → 任意群聊 → 右上角菜单 → 更多 → 导出聊天 → 选"不含媒体"，生成 <code>_chat.txt</code>。<br>
+      把文件拖到下方框里，会自动提取新的法语句子和场景，加入到题库中。
+    </p>
+    <div id="drop" style="border:2px dashed var(--line);border-radius:10px;padding:36px;text-align:center;color:var(--sub);cursor:pointer;background:#fff">
+      点击或拖入 <code>_chat*.txt</code> 文件（可多选）
+    </div>
+    <input type="file" id="file" accept=".txt" multiple hidden>
+    <div id="import-result" style="margin-top:12px"></div>
+  </div>
+</section>
+
+<!-- ========== SETTINGS ========== -->
+<section class="panel" id="settings">
+  <div class="card">
+    <h3>API 配置</h3>
+    <label>选择 AI 提供商</label>
+    <select id="provider">
+      <option value="gemini">Google Gemini（每天 1500 次免费 · 推荐 ⭐）</option>
+      <option value="mistral">Mistral AI（法国本土，法语最地道，每月 100 万 token 免费）</option>
+      <option value="groq">Groq（Llama 系列免费，速度极快）</option>
+      <option value="claude">Anthropic Claude（付费）</option>
+    </select>
+    <label>API Key（保存在你浏览器本地，不上传任何服务器）</label>
+    <input type="password" id="apikey" placeholder="点击下方链接申请">
+    <div id="apikey-help" style="font-size:12px;color:var(--sub);margin-top:4px"></div>
+    <label>模型</label>
+    <select id="model"></select>
+    <label>难度水平</label>
+    <select id="level">
+      <option value="A2">A2 起步（推荐）</option>
+      <option value="B1">B1 进阶</option>
+      <option value="B2">B2 流利</option>
+    </select>
+    <label>纠错语言</label>
+    <select id="explain">
+      <option value="zh">中文解释</option>
+      <option value="fr">法语解释</option>
+      <option value="bilingual">双语</option>
+    </select>
+    <label>朗读声音</label>
+    <select id="voice-engine">
+      <option value="google">Google 翻译女声（清晰 · 推荐）</option>
+      <option value="browser">浏览器原生（不消耗网络）</option>
+    </select>
+    <div style="margin-top:14px"><button class="primary" id="save-settings">保存</button></div>
+    <details open>
+      <summary>免费方案对比（点击展开）</summary>
+      <div style="font-size:13px;color:var(--sub);line-height:1.7">
+        <b>Gemini（推荐）</b>：访问 <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a>，用 Google 账号登录，点 "Create API key"。每天 1500 次免费请求，<b>不需要绑定信用卡</b>。<br>
+        <b>Mistral</b>：访问 <a href="https://console.mistral.ai/api-keys" target="_blank">console.mistral.ai/api-keys</a>，注册账号，免费层每月 100 万 token。法国公司，法语最地道。<br>
+        <b>Groq</b>：访问 <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a>，登录后创建 key。免费、超快，跑 Llama 模型。<br>
+        <br>
+        Web Speech（语音识别 + 朗读）用浏览器原生 API，完全免费，无需 key。
+      </div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ 启动场景库（来自 Lee 的真实工作记录） ============ */
+const SEED_SCENARIOS = [
+  {role:"配件-小巴巴清关 (清关行)", ctx:"催发未付清关柜的清单。Korhogo 仓库收到了几个柜，需要你和清关行核对哪些还没付款。", obj:"用法语请清关行发送 manifeste，并问她是否有未付柜统计表。"},
+  {role:"Awa (清关行 Bouaké)", ctx:"一个柜在港口已经 22 天还没送到仓库。", obj:"礼貌追问延误原因和预计送达时间。"},
+  {role:"Awa (清关行 Bouaké)", ctx:"她把 Korhogo 的柜（KTK 开头）和 Bouaké 的柜（KTA 开头）混在一起算账。", obj:"用法语澄清编号规则，要求今后分开记录。"},
+  {role:"小巴巴 (清关行)", ctx:"上次多付了一个 20GP 柜（TRHU2132330）的清关费 4,200,000 法郎。", obj:"通知她下次付款时扣除多付部分。"},
+  {role:"Désirée (佳鲁木沙清关公司)", ctx:"她要 BL 原件扫描件，但 Bouaké 同事还没把原件送来。", obj:"解释延迟原因，承诺一收到就扫描发过去。"},
+  {role:"Napoléon (财务上司)", ctx:"清关行希望直接收现金而不是支票，因为之前的支票兑现慢。", obj:"用法语回复说先把旧支票退回，再用现金付款。"},
+  {role:"Dembele (销售员)", ctx:"他的客户 KHP065 要某个件号 41300-2027-DGN 的价格，库存压货严重。", obj:"告诉他价格已调整，并请他把慢销品清单发到群里。"},
+  {role:"阿迈得 Amande (销售员)", ctx:"客户 KHP014 本月已还款 17,346,000，再还 4 百万就能拿到下月 50 万的 remise。", obj:"用法语提示销售员去通知客户加把劲。"},
+  {role:"阿迈得 Amande (销售员)", ctx:"他抱怨上月销售目标算错了，问你工资和补贴的事。", obj:"礼貌说明你刚到 Korhogo 两个月，工资由会计处理，请他直接找 comptable。"},
+  {role:"Diarra (销售员)", ctx:"客户 KHP002 这个月退货异常多（一次退 1000 件）。", obj:"用法语问 Diarra 客户为什么退这么多，了解原因。"},
+  {role:"Diarra (销售员)", ctx:"他出差回来要报销住宿和交通费。", obj:"提醒他必须索取 facture（发票），否则不能报销。"},
+  {role:"Diarra (销售员)", ctx:"他想知道客户 KHP054 二月份的销售总额和返点。", obj:"告诉他销售额 116,656,700，返点 4%，所以 remise 是 4,666,268。"},
+  {role:"Bouba / 三永 / Diarra (销售员群)", ctx:"罗可可在群里问大家：客户喜不喜欢摩托车 AP 牌的新化油器？想做市场调研。", obj:"用销售员的视角回复（你扮演销售员），讨论价格、市场反应、推广方式。"},
+  {role:"销售员群", ctx:"要发布通知：本月起 remise 在每月 20-25 号之间打到客户账户。", obj:"用法语写一条通告，要求清晰、专业、礼貌。"},
+  {role:"销售员群", ctx:"重要通告：外地客户（非 Korhogo 本地）只能用银行转账还款，转账费由客户承担。", obj:"清晰地解释规则。"},
+  {role:"配件-小巴巴清关", ctx:"她发来一个柜号 CMAU3545483，但你在系统里找不到。", obj:"礼貌请她核实是否真的属于你们公司。"},
+  {role:"罗可可 (中方上司)", ctx:"明天有两个柜的 Aruba 摩托发动机要到（共 1118 台），需要安排销售员通知客户来取货。", obj:"分配工作给销售员，确保货物分配合理。"},
+  {role:"Dembele (销售员)", ctx:"本月开始纸箱回收（collecte des cartons）活动，给客户的礼品（袋子、钥匙扣）需要登记。", obj:"告诉他流程和上月一样，并要求他汇报每位客户领取的礼品数量。"},
+  {role:"Awa (清关行)", ctx:"她抱怨送一个 20 尺柜到 Korhogo 要 800,000 法郎太贵，希望谈价格。", obj:"用法语和她协商，要么提高单次配送数量，要么调整价格。"},
+  {role:"罗可可", ctx:"客户 KHP002 本月还款太少，估计拿不到 remise。", obj:"提醒销售员（你扮演 Lee 给销售员发消息）月底盯紧客户回款。"},
+  {role:"Dembele (销售员)", ctx:"他垫钱买了一台 5000 瓦稳压器，要报销。", obj:"让他先把 facture 发过来再报销。"},
+  {role:"Désirée (清关公司)", ctx:"清关已经完成，问柜什么时候能拉走。", obj:"用法语确认今天能否安排运输。"},
+  {role:"罗可可 (中方同事)", ctx:"老同事离职，你接手后需要核对所有未付清关费的柜。", obj:"用法语向清关行解释情况并请求一份完整未付列表。"},
+  {role:"Bouba (销售员)", ctx:"问 AP Pro T-shirt XL 码什么时候到货。", obj:"告诉他仓库目前没货，下次到货优先给他。"},
+];
+
+/* ============ 状态管理 ============ */
+const LS = {
+  get(k,d){try{return JSON.parse(localStorage.getItem("ft_"+k))??d}catch(e){return d}},
+  set(k,v){localStorage.setItem("ft_"+k,JSON.stringify(v))}
+};
+const PROVIDERS = {
+  gemini: {
+    label: "Google Gemini",
+    keyHelp: '免费申请：<a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a>（用 Google 账号登录即可，无需绑卡）',
+    keyPattern: "AIza...",
+    models: [
+      {id:"gemini-2.0-flash", label:"Gemini 2.0 Flash（推荐 · 免费额度高）"},
+      {id:"gemini-2.5-flash", label:"Gemini 2.5 Flash（更聪明）"},
+      {id:"gemini-1.5-flash", label:"Gemini 1.5 Flash"},
+    ],
+    defaultModel: "gemini-2.0-flash",
+  },
+  mistral: {
+    label: "Mistral AI",
+    keyHelp: '免费申请：<a href="https://console.mistral.ai/api-keys" target="_blank">console.mistral.ai/api-keys</a>（法国公司，法语最地道）',
+    keyPattern: "...",
+    models: [
+      {id:"mistral-small-latest", label:"Mistral Small（推荐）"},
+      {id:"open-mistral-nemo", label:"Open Mistral Nemo（免费）"},
+      {id:"mistral-large-latest", label:"Mistral Large（更强）"},
+    ],
+    defaultModel: "mistral-small-latest",
+  },
+  groq: {
+    label: "Groq",
+    keyHelp: '免费申请：<a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a>（速度极快）',
+    keyPattern: "gsk_...",
+    models: [
+      {id:"llama-3.3-70b-versatile", label:"Llama 3.3 70B（推荐）"},
+      {id:"llama-3.1-8b-instant", label:"Llama 3.1 8B（更快）"},
+    ],
+    defaultModel: "llama-3.3-70b-versatile",
+  },
+  claude: {
+    label: "Anthropic Claude",
+    keyHelp: '需要付费：<a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>',
+    keyPattern: "sk-ant-...",
+    models: [
+      {id:"claude-haiku-4-5-20251001", label:"Haiku 4.5（便宜快速）"},
+      {id:"claude-sonnet-4-6", label:"Sonnet 4.6"},
+    ],
+    defaultModel: "claude-haiku-4-5-20251001",
+  },
+};
+
+let state = {
+  provider: LS.get("provider","gemini"),
+  apikeys: LS.get("apikeys",{}),  // {gemini:"...", mistral:"...", ...}
+  model: LS.get("model","gemini-2.0-flash"),
+  level: LS.get("level","A2"),
+  explain: LS.get("explain","zh"),
+  voiceEngine: LS.get("voiceEngine","google"),
+  scenarios: LS.get("scenarios", SEED_SCENARIOS),
+  vocab: LS.get("vocab", []),
+  history: [],
+  current: null,
+};
+// 兼容旧版本
+if(typeof state.apikeys === "string") state.apikeys = {};
+const getKey = ()=>state.apikeys[state.provider] || "";
+
+/* ============ UI 工具 ============ */
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2000)}
+
+document.querySelectorAll("nav button").forEach(b=>{
+  b.onclick=()=>{
+    $$("nav button").forEach(x=>x.classList.remove("active"));
+    $$(".panel").forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    $("#"+b.dataset.tab).classList.add("active");
+    if(b.dataset.tab==="scenarios") renderScenarios();
+    if(b.dataset.tab==="vocab") renderVocab();
+  };
+});
+
+/* ============ 设置 ============ */
+function refreshProviderUI(){
+  const p = PROVIDERS[state.provider];
+  $("#provider").value = state.provider;
+  $("#apikey").placeholder = p.keyPattern;
+  $("#apikey").value = state.apikeys[state.provider] || "";
+  $("#apikey-help").innerHTML = p.keyHelp;
+  $("#model").innerHTML = p.models.map(m=>`<option value="${m.id}">${m.label}</option>`).join("");
+  // 如果当前 model 不属于该 provider，重置为默认
+  if(!p.models.find(m=>m.id===state.model)) state.model = p.defaultModel;
+  $("#model").value = state.model;
+}
+refreshProviderUI();
+$("#level").value = state.level;
+$("#explain").value = state.explain;
+$("#voice-engine").value = state.voiceEngine;
+$("#provider").onchange = ()=>{
+  state.provider = $("#provider").value;
+  state.model = PROVIDERS[state.provider].defaultModel;
+  refreshProviderUI();
+};
+$("#save-settings").onclick=()=>{
+  state.apikeys[state.provider] = $("#apikey").value.trim();
+  state.model = $("#model").value;
+  state.level = $("#level").value;
+  state.explain = $("#explain").value;
+  state.voiceEngine = $("#voice-engine").value;
+  LS.set("provider",state.provider);
+  LS.set("apikeys",state.apikeys);
+  LS.set("model",state.model);
+  LS.set("level",state.level); LS.set("explain",state.explain);
+  LS.set("voiceEngine",state.voiceEngine);
+  toast("已保存");
+};
+
+/* ============ 场景列表 ============ */
+function renderScenarios(){
+  $("#sc-count").textContent = `· 共 ${state.scenarios.length} 个`;
+  $("#sc-list").innerHTML = state.scenarios.map((s,i)=>`
+    <div class="sc-item" data-i="${i}">
+      <div class="role">${escapeHtml(s.role)}</div>
+      <div class="desc">${escapeHtml(s.ctx)}</div>
+    </div>`).join("");
+  $$("#sc-list .sc-item").forEach(el=>{
+    el.onclick=()=>{
+      startScenario(state.scenarios[+el.dataset.i]);
+      $$("nav button")[0].click();
+    };
+  });
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c])}
+
+/* ============ 词汇本 ============ */
+function renderVocab(){
+  $("#vc-count").textContent = `· ${state.vocab.length} 条`;
+  if(!state.vocab.length){$("#vc-empty").style.display="block";$("#vc-list").innerHTML="";return}
+  $("#vc-empty").style.display="none";
+  $("#vc-list").innerHTML = state.vocab.map(v=>`<span class="vocab-tag" title="${escapeHtml(v.note||'')}">${escapeHtml(v.term)}</span>`).join("");
+}
+
+/* ============ 开始对话 ============ */
+$("#btn-start").onclick=()=>{ const s = state.scenarios[Math.floor(Math.random()*state.scenarios.length)]; startScenario(s); };
+$("#btn-newscene").onclick=()=>{ const s = state.scenarios[Math.floor(Math.random()*state.scenarios.length)]; startScenario(s); };
+
+async function startScenario(sc){
+  state.current = sc;
+  state.history = [];
+  $("#banner-role").textContent = "角色：" + sc.role;
+  $("#banner-ctx").textContent = sc.ctx;
+  $("#banner-obj").textContent = "🎯 " + sc.obj;
+  $("#chat").innerHTML = "";
+  // AI 先开场
+  await aiTurn(true);
+}
+
+/* ============ 渲染消息 ============ */
+function addMsg(who, text, feedback, suggestions){
+  const div = document.createElement("div");
+  div.className = "msg" + (who==="me"?" me":"");
+  const isFr = who!=="me";
+  let sugHtml = "";
+  if(isFr && Array.isArray(suggestions) && suggestions.length){
+    sugHtml = `<div class="suggestions">
+      <div class="label">💡 你可以这样回复</div>
+      ${suggestions.map((s,i)=>`<div class="sug" data-fr="${escapeHtml(s.fr||'')}">
+        <div>
+          <div class="fr">${escapeHtml(s.fr||'')}</div>
+          ${s.zh?`<div class="zh">${escapeHtml(s.zh)}</div>`:''}
+        </div>
+        <button class="play-sug" title="朗读">🔊</button>
+      </div>`).join("")}
+    </div>`;
+  }
+  div.innerHTML = `
+    <div class="who">${who==="me"?"你":"AI"}</div>
+    <div class="body">
+      <div>${escapeHtml(text)} ${isFr?'<button class="play" title="朗读">🔊</button>':''}</div>
+      ${feedback?renderFeedback(feedback):''}
+      ${sugHtml}
+    </div>`;
+  if(isFr){
+    div.querySelector(".play").onclick=()=>speak(text);
+    div.querySelectorAll(".sug").forEach(el=>{
+      const fr = el.dataset.fr;
+      el.querySelector(".play-sug").onclick = e=>{e.stopPropagation();speak(fr)};
+      el.onclick = ()=>{ $("#input").value = fr; $("#input").focus(); };
+    });
+  }
+  $("#chat").appendChild(div);
+  $("#chat").scrollTop = $("#chat").scrollHeight;
+}
+function renderFeedback(fb){
+  const hasErr = fb.has_error;
+  return `<div class="feedback ${hasErr?'has-error':''}">
+    ${hasErr?`<div>更地道的说法：<span class="corrected">${escapeHtml(fb.corrected||'')}</span></div>`:`<div>✓ 表达不错</div>`}
+    ${fb.note?`<div class="note">${escapeHtml(fb.note)}</div>`:''}
+  </div>`;
+}
+
+/* ============ 多 Provider API ============ */
+async function callLLM(systemPrompt, messages){
+  const key = getKey();
+  if(!key){ toast("请先在「设置」里填入 "+PROVIDERS[state.provider].label+" 的 API key"); throw new Error("no key") }
+  if(state.provider==="gemini") return callGemini(systemPrompt, messages, key);
+  if(state.provider==="mistral") return callOpenAILike("https://api.mistral.ai/v1/chat/completions", systemPrompt, messages, key);
+  if(state.provider==="groq") return callOpenAILike("https://api.groq.com/openai/v1/chat/completions", systemPrompt, messages, key);
+  if(state.provider==="claude") return callClaude(systemPrompt, messages, key);
+  throw new Error("未知 provider");
+}
+async function callGemini(systemPrompt, messages, key){
+  const contents = messages.map(m=>({
+    role: m.role==="assistant" ? "model" : "user",
+    parts: [{text: m.content}]
+  }));
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${state.model}:generateContent?key=${encodeURIComponent(key)}`;
+  const res = await fetch(url,{
+    method:"POST",
+    headers:{"content-type":"application/json"},
+    body: JSON.stringify({
+      systemInstruction: {parts:[{text: systemPrompt}]},
+      contents,
+      generationConfig: {maxOutputTokens: 800, temperature: 0.7, responseMimeType:"application/json"}
+    })
+  });
+  if(!res.ok){ const t=await res.text(); throw new Error("Gemini "+res.status+": "+t) }
+  const data = await res.json();
+  return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+}
+async function callOpenAILike(url, systemPrompt, messages, key){
+  const msgs = [{role:"system",content:systemPrompt}, ...messages];
+  const res = await fetch(url,{
+    method:"POST",
+    headers:{"content-type":"application/json","authorization":"Bearer "+key},
+    body: JSON.stringify({model: state.model, messages: msgs, max_tokens: 800, temperature:0.7})
+  });
+  if(!res.ok){ const t=await res.text(); throw new Error(state.provider+" "+res.status+": "+t) }
+  const data = await res.json();
+  return data.choices[0].message.content;
+}
+async function callClaude(systemPrompt, messages, key){
+  const res = await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{
+      "content-type":"application/json","x-api-key":key,
+      "anthropic-version":"2023-06-01",
+      "anthropic-dangerous-direct-browser-access":"true"
+    },
+    body: JSON.stringify({model: state.model, max_tokens: 800, system: systemPrompt, messages})
+  });
+  if(!res.ok){ const t=await res.text(); throw new Error("Claude "+res.status+": "+t) }
+  const data = await res.json();
+  return data.content[0].text;
+}
+
+function buildSystem(){
+  const explainMap = {zh:"中文",fr:"法语",bilingual:"中法双语"};
+  const lenLimit = state.level==="A2" ? "1-2 句简短的法语，每句不超过 10 个词" :
+                   state.level==="B1" ? "2 句法语，每句不超过 15 个词" :
+                                        "2-3 句法语";
+  return `你是 Lee 的法语口语陪练 Steven。Lee 在科特迪瓦 Korhogo 做摩托车配件国际商务，法语水平 ${state.level}。
+
+当前场景：
+- 你扮演：${state.current.role}
+- 背景：${state.current.ctx}
+- Lee 要练习：${state.current.obj}
+
+【对话规则】
+1. 用 ${lenLimit}，简单常用词，像真实 WhatsApp 聊天那样口语化直接。
+2. 不要急于结束话题——这是练习对话，要持续延展，每次回复后都自然地推进下一步：追问细节、引出新问题、提出具体要求、或转入相关子话题。同一个场景至少要进行 8-10 个回合再考虑收尾。
+3. 不要总结、不要说"祝您工作顺利""请告诉我有什么我可以帮助"这种结束语。
+
+【最重要 — 给 Lee 提供回复建议】
+Lee 的法语很多时候不会表达。每次你说完后，你必须提供 3 条 Lee 可能用来回复你的法语建议（suggestions），从简单到稍复杂，让他直接选用或参考。
+
+【输出 JSON】严格 JSON，不加 markdown：
+{
+  "reply": "你扮演的角色说的法语",
+  "feedback": {"has_error":bool,"corrected":"...","note":"用${explainMap[state.explain]}简短解释"} | null（开场时为 null）,
+  "suggestions": [
+    {"fr":"简单回复 A","zh":"中文意思"},
+    {"fr":"中等回复 B","zh":"中文意思"},
+    {"fr":"更完整回复 C","zh":"中文意思"}
+  ]
+}
+
+示例：
+{"reply":"Bonjour Lee. On a payé combien de conteneurs ?","feedback":null,"suggestions":[{"fr":"Trois conteneurs.","zh":"三个柜。"},{"fr":"On a payé trois, il en reste deux.","zh":"付了三个，还剩两个。"},{"fr":"Trois conteneurs sont payés. Je vous envoie la liste.","zh":"已付三个柜，我把清单发给您。"}]}`;
+}
+
+async function aiTurn(isOpen=false){
+  const sys = buildSystem();
+  const msgs = isOpen
+    ? [{role:"user",content:"[场景开始，请开场]"}]
+    : state.history.map(h=>({role:h.role,content:h.content}));
+  $("#send").disabled=true;
+  try{
+    const raw = await callLLM(sys,msgs);
+    let parsed;
+    try{ parsed = JSON.parse(raw); }
+    catch(e){
+      const m = raw.match(/\{[\s\S]*\}/);
+      parsed = m ? JSON.parse(m[0]) : {reply:raw, feedback:null};
+    }
+    // 给上一轮 me 消息追加 feedback
+    if(parsed.feedback && state.history.length){
+      const last = $$(".msg.me");
+      if(last.length){
+        const lastEl = last[last.length-1].querySelector(".body");
+        if(!lastEl.querySelector(".feedback")){
+          lastEl.insertAdjacentHTML("beforeend", renderFeedback(parsed.feedback));
+        }
+        if(parsed.feedback.has_error && parsed.feedback.corrected){
+          // 收集到词汇本
+          const term = parsed.feedback.corrected.split(/[.,;!?]/)[0].trim();
+          if(term && term.length<80 && !state.vocab.find(v=>v.term===term)){
+            state.vocab.unshift({term, note:parsed.feedback.note||"", t:Date.now()});
+            state.vocab = state.vocab.slice(0,200);
+            LS.set("vocab",state.vocab);
+          }
+        }
+      }
+    }
+    addMsg("ai", parsed.reply, null, parsed.suggestions);
+    state.history.push({role:"assistant", content: parsed.reply});
+    if($("#autoplay").checked) speak(parsed.reply);
+  }catch(e){
+    toast("出错：" + e.message);
+    console.error(e);
+  }finally{
+    $("#send").disabled=false;
+  }
+}
+
+/* ============ 发送 ============ */
+$("#send").onclick = sendMsg;
+$("#input").addEventListener("keydown",e=>{
+  if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); sendMsg(); }
+});
+async function sendMsg(){
+  if(!state.current){ toast("先点「开始今日对话」"); return }
+  const text = $("#input").value.trim();
+  if(!text) return;
+  $("#input").value = "";
+  addMsg("me", text);
+  state.history.push({role:"user", content:text});
+  await aiTurn();
+}
+
+/* ============ Web Speech ============ */
+let recognition = null, recording = false;
+function initRecognition(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ toast("当前浏览器不支持语音识别，建议用 Chrome / Edge"); return null }
+  const r = new SR();
+  r.lang = "fr-FR";
+  r.continuous = false;
+  r.interimResults = true;
+  let finalText = "";
+  r.onresult = e=>{
+    let interim = "";
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      if(e.results[i].isFinal) finalText += e.results[i][0].transcript;
+      else interim += e.results[i][0].transcript;
+    }
+    $("#input").value = finalText + interim;
+  };
+  r.onend = ()=>{
+    recording = false;
+    $("#mic").classList.remove("recording");
+  };
+  r.onerror = e=>{ toast("识别错误："+e.error); recording=false; $("#mic").classList.remove("recording"); };
+  return r;
+}
+$("#mic").onclick=()=>{
+  if(!recognition) recognition = initRecognition();
+  if(!recognition) return;
+  if(recording){ recognition.stop(); recording=false; $("#mic").classList.remove("recording"); }
+  else{
+    $("#input").value = "";
+    try{ recognition.start(); recording=true; $("#mic").classList.add("recording"); }
+    catch(e){ toast("无法启动麦克风："+e.message) }
+  }
+};
+function pickBestFrenchVoice(){
+  const voices = speechSynthesis.getVoices();
+  const fr = voices.filter(v=>v.lang.toLowerCase().startsWith("fr"));
+  if(!fr.length) return null;
+  // 偏好顺序：premium / enhanced / 已知高质量名字 > fr-FR > 任意法语
+  const score = v=>{
+    let s = 0;
+    const n = (v.name||"").toLowerCase();
+    if(/premium|enhanced|neural|natural/.test(n)) s += 100;
+    if(/thomas|amélie|amelie|audrey|aurelie|aurélie|marie|google français|google francais/.test(n)) s += 50;
+    if(v.lang === "fr-FR") s += 10;
+    if(v.localService) s += 5;
+    return s;
+  };
+  fr.sort((a,b)=>score(b)-score(a));
+  return fr[0];
+}
+let googleAudioQueue = [];
+function stopAllSpeech(){
+  if(window.speechSynthesis) speechSynthesis.cancel();
+  googleAudioQueue.forEach(a=>{try{a.pause();a.src=""}catch(e){}});
+  googleAudioQueue = [];
+}
+function splitForTTS(text, max=180){
+  const parts = [];
+  let buf = "";
+  const tokens = text.split(/(?<=[.!?。！？,;:])\s+/);
+  for(const t of tokens){
+    if((buf+" "+t).trim().length > max){
+      if(buf) parts.push(buf.trim());
+      if(t.length > max){
+        for(let i=0;i<t.length;i+=max) parts.push(t.slice(i,i+max));
+        buf = "";
+      } else buf = t;
+    } else buf = (buf+" "+t).trim();
+  }
+  if(buf) parts.push(buf.trim());
+  return parts;
+}
+async function speakGoogle(text){
+  const chunks = splitForTTS(text);
+  for(const chunk of chunks){
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(chunk)}&tl=fr&client=tw-ob`;
+    const audio = new Audio(url);
+    googleAudioQueue.push(audio);
+    await new Promise(resolve=>{
+      audio.onended = resolve;
+      audio.onerror = ()=>{ console.warn("Google TTS 失败，回退浏览器声音"); speakBrowser(text); resolve(); };
+      audio.play().catch(e=>{ console.warn("Audio play failed",e); speakBrowser(text); resolve(); });
+    });
+  }
+}
+function speakBrowser(text){
+  if(!window.speechSynthesis) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "fr-FR"; u.rate = 1.0; u.pitch = 1.0; u.volume = 1.0;
+  const v = pickBestFrenchVoice();
+  if(v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+function speak(text){
+  stopAllSpeech();
+  if(state.voiceEngine === "google") speakGoogle(text);
+  else speakBrowser(text);
+}
+
+/* ============ 导入聊天记录 ============ */
+$("#drop").onclick=()=>$("#file").click();
+$("#drop").ondragover=e=>{e.preventDefault();$("#drop").style.background="#fff7f0"};
+$("#drop").ondragleave=()=>{$("#drop").style.background="#fff"};
+$("#drop").ondrop=e=>{e.preventDefault();$("#drop").style.background="#fff";handleFiles(e.dataTransfer.files)};
+$("#file").onchange=e=>handleFiles(e.target.files);
+
+async function handleFiles(files){
+  let added = 0, sentences = [];
+  for(const f of files){
+    const text = await f.text();
+    const lines = text.split("\n");
+    for(const line of lines){
+      // [date time] sender: content
+      const m = line.match(/\][^\]]*?\]\s*([^:]+?):\s*(.+)$/);
+      if(!m) continue;
+      const sender = m[1].trim(), content = m[2].trim();
+      if(/图像已忽略|文档已省略|这条消息|更改电话号码|添加了|移除了|删除了/.test(content)) continue;
+      // 法语启发式：含常见法语词且长度合理
+      if(content.length<25 || content.length>300) continue;
+      if(!/\b(le|la|les|un|une|de|des|du|est|sont|nous|vous|je|et|pour|conteneur|client|paiement|merci|bonjour|svp|dédouanement|monsieur|madame)\b/i.test(content)) continue;
+      sentences.push({sender, content});
+    }
+  }
+  // 去重
+  const seen = new Set();
+  sentences = sentences.filter(s=>{const k=s.content.slice(0,50);if(seen.has(k))return false;seen.add(k);return true});
+
+  if(!sentences.length){
+    $("#import-result").innerHTML = `<div style="color:var(--bad)">未找到有效法语句子，请确认是 WhatsApp 导出的 _chat.txt 格式。</div>`;
+    return;
+  }
+
+  $("#import-result").innerHTML = `<div>✅ 提取了 <b>${sentences.length}</b> 条法语句子。正在用 AI 生成新场景…</div>`;
+
+  if(!getKey()){
+    // 没 key 也保存原句作为补充材料
+    state.scenarios = state.scenarios.concat(sentences.slice(0,30).map(s=>({
+      role: s.sender + " (来自聊天)",
+      ctx: "他/她说："+s.content,
+      obj: "用法语回复这条消息，处理对方的请求或问题。"
+    })));
+    LS.set("scenarios",state.scenarios);
+    $("#import-result").innerHTML += `<div>⚠️ 未配置 API key，已用原句直接生成 ${Math.min(30,sentences.length)} 个场景（无智能合并）。在「设置」配 key 后再次导入可获更好效果。</div>`;
+    return;
+  }
+
+  // 用 AI 把句子合成几个新场景
+  try{
+    const sample = sentences.slice(-80).map(s=>`[${s.sender}] ${s.content}`).join("\n");
+    const sys = `你帮 Lee 整理法语口语练习场景。Lee 在 Côte d'Ivoire 做摩托车配件国际商务。下面是他最近 WhatsApp 聊天记录的真实法语句子。请提炼出 6-10 个有代表性的对话场景，输出 JSON 数组，每项含 role, ctx, obj 三个字段：
+- role: 对方角色（销售员/清关行/财务/上司...）
+- ctx: 中文描述场景背景，2-3 句话
+- obj: 中文描述 Lee 在这个场景中要练习的法语任务
+只输出 JSON 数组，不要其他文字。`;
+    const raw = await callLLM(sys,[{role:"user",content:sample}]);
+    let arr;
+    try{ arr = JSON.parse(raw) }
+    catch(e){ const m = raw.match(/\[[\s\S]*\]/); arr = m?JSON.parse(m[0]):[] }
+    if(Array.isArray(arr)){
+      state.scenarios = state.scenarios.concat(arr);
+      LS.set("scenarios",state.scenarios);
+      added = arr.length;
+      $("#import-result").innerHTML = `<div style="color:var(--good)">✅ 成功新增 <b>${added}</b> 个场景到题库。去「场景库」查看。</div>`;
+    }else{
+      $("#import-result").innerHTML += `<div style="color:var(--bad)">AI 返回格式异常，请重试。</div>`;
+    }
+  }catch(e){
+    $("#import-result").innerHTML += `<div style="color:var(--bad)">出错：${e.message}</div>`;
+  }
+}
+
+/* ============ 启动 ============ */
+if(!getKey()){
+  setTimeout(()=>{
+    if(!getKey()){
+      toast("请先去「设置」填入 API key");
+      $$("nav button").forEach(b=>b.classList.remove("active"));
+      $$(".panel").forEach(p=>p.classList.remove("active"));
+      $$("nav button[data-tab=settings]")[0].classList.add("active");
+      $("#settings").classList.add("active");
+    }
+  },300);
+}
+// 提前加载 voices
+if(window.speechSynthesis) speechSynthesis.getVoices();
+</script>
+</body>
+</html>

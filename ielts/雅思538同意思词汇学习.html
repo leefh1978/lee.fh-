@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雅思539考点词</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0f0f13;--surface:#1a1a24;--card:#22222e;--border:#2e2e3e;
+  --accent:#6c63ff;--green:#43e97b;--yellow:#f7c948;--red:#ff6b6b;
+  --text:#e8e8f0;--muted:#6b6b80;--r:14px;
+  --c1:#6c63ff;--c2:#00c9a7;--c3:#ff9f43;
+}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden}
+nav{display:flex;align-items:center;gap:6px;padding:14px 20px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;flex-wrap:wrap}
+.logo{font-size:17px;font-weight:700;color:var(--accent);margin-right:auto}
+.nb{padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:500;transition:all .2s;background:transparent;color:var(--muted)}
+.nb:hover{color:var(--text);background:var(--card)}
+.nb.active{background:var(--accent);color:#fff}
+.page{display:none;padding:20px;max-width:920px;margin:0 auto}
+.page.active{display:block}
+.cat-badge{display:inline-block;padding:2px 9px;border-radius:100px;font-size:11px;font-weight:700}
+.cb1{background:rgba(108,99,255,.15);color:var(--c1);border:1px solid rgba(108,99,255,.3)}
+.cb2{background:rgba(0,201,167,.15);color:var(--c2);border:1px solid rgba(0,201,167,.3)}
+.cb3{background:rgba(255,159,67,.15);color:var(--c3);border:1px solid rgba(255,159,67,.3)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center}
+.sn{font-size:26px;font-weight:700}
+.sl{font-size:12px;color:var(--muted);margin-top:3px}
+.sc-blue .sn{color:var(--accent)}.sc-green .sn{color:var(--green)}.sc-yellow .sn{color:var(--yellow)}.sc-red .sn{color:var(--red)}
+.prog-wrap{background:var(--card);border-radius:100px;height:7px;margin-bottom:20px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:100px;transition:width .5s}
+.cat-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.cat-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+.cs-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-weight:600;font-size:14px}
+.cs-bar{height:5px;background:var(--card);border-radius:100px;overflow:hidden;margin-bottom:6px}
+.cs-fill{height:100%;border-radius:100px;transition:width .5s}
+.cs1 .cs-fill{background:var(--c1)}.cs2 .cs-fill{background:var(--c2)}.cs3 .cs-fill{background:var(--c3)}
+.cs-nums{font-size:12px;color:var(--muted)}
+.btn{padding:8px 18px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s}
+.btn-p{background:var(--accent);color:#fff}.btn-p:hover{background:#7c75ff}
+.btn-g{background:var(--card);color:var(--text);border:1px solid var(--border)}.btn-g:hover{border-color:var(--accent);color:var(--accent)}
+.btn-green{background:var(--green);color:#000}.btn-red{background:var(--red);color:#fff}.btn-yellow{background:var(--yellow);color:#000}
+.btn-sm{padding:5px 12px;font-size:12px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.pill-row{display:flex;gap:6px;flex-wrap:wrap}
+.pill{padding:5px 13px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:12px;font-weight:500;transition:all .15s}
+.pill:hover{color:var(--text)}
+.pa-all.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.pa-1.active{background:var(--c1);color:#fff;border-color:var(--c1)}
+.pa-2.active{background:var(--c2);color:#000;border-color:var(--c2)}
+.pa-3.active{background:var(--c3);color:#000;border-color:var(--c3)}
+.pa-status.active{background:var(--muted);color:#fff;border-color:var(--muted)}
+.fc-top{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.fc-auto{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-left:auto;cursor:pointer}
+.fc-auto input{cursor:pointer;accent-color:var(--accent)}
+.card-area{perspective:1200px;margin-bottom:16px}
+.flashcard{width:100%;height:300px;position:relative;transform-style:preserve-3d;transition:transform .5s;cursor:pointer;user-select:none}
+.flashcard.flipped{transform:rotateY(180deg)}
+.cf{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;border:1px solid var(--border);background:var(--surface)}
+.cf-back{transform:rotateY(180deg);background:linear-gradient(135deg,#1c1c2e,#252535)}
+.card-tl{position:absolute;top:12px;left:14px;display:flex;gap:6px;align-items:center}
+.card-tr{position:absolute;top:12px;right:14px;font-size:12px;color:var(--muted)}
+.fc-word{font-size:40px;font-weight:700;text-align:center;margin-bottom:8px}
+.fc-hint{font-size:12px;color:var(--muted)}
+.speak-btn{position:absolute;bottom:12px;right:14px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:14px;color:var(--muted);transition:all .15s;z-index:2}
+.speak-btn:hover{color:var(--accent);border-color:var(--accent)}
+.speak-btn.on{color:var(--green);border-color:var(--green)}
+.fc-meaning{font-size:20px;font-weight:600;color:var(--c1);text-align:center;margin-bottom:10px}
+
+/* Synonyms area */
+.fc-syns{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:0}
+.syn-chip{display:inline-flex;align-items:center;gap:4px;background:var(--card);border:1px solid var(--border);padding:4px 12px;border-radius:100px;color:var(--text);font-size:12px;cursor:pointer;transition:all .2s;user-select:none}
+.syn-chip:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.syn-chip.active{border-color:var(--green);color:var(--green);background:rgba(67,233,123,.08)}
+.syn-chip .chip-icon{font-size:11px;opacity:.6}
+
+/* Translation popup below synonyms */
+.syn-translation{margin-top:10px;min-height:24px;text-align:center;font-size:13px;color:var(--yellow);transition:all .2s;font-weight:500}
+
+.card-marks{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.card-marks .btn{flex:1;max-width:140px;text-align:center}
+.fc-prog{text-align:center;font-size:12px;color:var(--muted);margin-top:10px}
+.quiz-cfg{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:20px}
+.cfg-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:10px}
+.q-opts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.qo{padding:7px 15px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;font-size:13px;transition:all .15s}
+.qo.active{border-color:var(--accent);color:var(--accent);background:rgba(108,99,255,.1)}
+.q-score{display:flex;gap:20px;justify-content:center;margin-bottom:14px;font-size:13px}
+.q-score span{color:var(--muted)}.q-score strong{color:var(--text)}
+.q-question{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px;margin-bottom:12px;text-align:center}
+.q-pw{font-size:32px;font-weight:700;margin-bottom:5px}
+.q-ph{font-size:12px;color:var(--muted)}
+.q-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.q-choice{padding:14px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;text-align:left;font-size:13px;transition:all .15s;line-height:1.5}
+.q-choice:hover:not(.dis){border-color:var(--accent)}
+.q-choice.correct{border-color:var(--green);background:rgba(67,233,123,.1);color:var(--green)}
+.q-choice.wrong{border-color:var(--red);background:rgba(255,107,107,.1);color:var(--red)}
+.q-choice.dis{cursor:default}
+.q-fb{text-align:center;font-size:13px;padding:10px;border-radius:8px;margin-bottom:10px;display:none}
+.q-fb.show{display:block}
+.q-fb.correct{background:rgba(67,233,123,.1);color:var(--green)}
+.q-fb.wrong{background:rgba(255,107,107,.1);color:var(--red)}
+.search-row{display:flex;gap:10px;margin-bottom:12px}
+.search-row input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 14px;font-size:13px;outline:none;transition:border-color .15s}
+.search-row input:focus{border-color:var(--accent)}
+.wl-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.wf{padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:12px;transition:all .15s}
+.wf.active{border-color:var(--accent);color:var(--accent)}
+.word-table{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.wrow{display:grid;grid-template-columns:36px 46px 148px 160px 1fr 68px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);gap:10px;font-size:13px;transition:background .1s}
+.wrow:last-child{border-bottom:none}
+.wrow:hover{background:var(--card)}
+.wrow.hdr{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--card)}
+.wrow .ww{font-weight:700;color:var(--accent);display:flex;align-items:center;gap:4px}
+.wrow .wm{font-size:12px}.wrow .ws{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sdot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+.sdot.mastered{background:var(--green)}.sdot.learning{background:var(--yellow)}.sdot.new{background:var(--border)}
+.wst{display:flex;align-items:center;gap:5px;font-size:11px}
+.sm{background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:1px 3px;border-radius:3px;transition:color .1s;line-height:1}
+.sm:hover{color:var(--accent)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--card);border:1px solid var(--border);padding:9px 18px;border-radius:8px;font-size:13px;transition:transform .3s;z-index:999}
+#toast.show{transform:translateX(-50%) translateY(0)}
+h2{font-size:18px;margin-bottom:16px}
+.empty{text-align:center;padding:40px;color:var(--muted);font-size:13px}
+.gap{margin-top:22px}
+/* Prev / Next nav */
+.fc-nav{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:10px}
+.fc-nav .btn{min-width:100px}
+/* Error word answer card */
+.err-ans-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-top:12px;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.err-ans-word{font-size:22px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.err-ans-meaning{font-size:14px;color:var(--yellow);margin-bottom:8px}
+.err-ans-syns{display:flex;flex-wrap:wrap;gap:6px}
+.err-ans-syn{padding:3px 11px;background:var(--card);border:1px solid var(--border);border-radius:100px;font-size:12px;color:var(--text)}
+/* Spelling quiz */
+.spell-wrap{margin-bottom:12px}
+.spell-inputs-wrap{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+.spell-input{width:100%;background:var(--card);border:2px solid var(--border);color:var(--text);border-radius:10px;padding:13px 15px;font-size:20px;text-align:center;outline:none;transition:border-color .2s;font-family:inherit;letter-spacing:.04em}
+.spell-input:focus{border-color:var(--accent)}
+.spell-input.ok{border-color:var(--green);background:rgba(67,233,123,.07)}
+.spell-input.no{border-color:var(--red);background:rgba(255,107,107,.07)}
+.spell-label{font-size:11px;color:var(--muted);text-align:center;margin-bottom:3px;letter-spacing:.03em}
+.spell-hint{font-size:12px;color:var(--muted);text-align:center;margin-top:4px}
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .cat-stats{grid-template-columns:1fr}
+  .q-choices{grid-template-columns:1fr}
+  .wrow{grid-template-columns:36px 120px 1fr 60px}
+  .wrow .wm,.wrow .ws{display:none}
+  nav{padding:10px}
+  .nb{padding:6px 10px;font-size:12px}
+  .fc-word{font-size:30px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">雅思539考点词</div>
+  <button class="nb active" onclick="showPage('home')">总览</button>
+  <button class="nb" onclick="showPage('flashcard')">闪卡</button>
+  <button class="nb" onclick="showPage('quiz')">测验</button>
+  <button class="nb" onclick="showPage('words')">词表</button>
+</nav>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <h2>学习进度</h2>
+  <div class="stats-grid">
+    <div class="stat-card sc-blue"><div class="sn" id="st-total">—</div><div class="sl">总词数</div></div>
+    <div class="stat-card sc-green"><div class="sn" id="st-mastered">—</div><div class="sl">已掌握</div></div>
+    <div class="stat-card sc-yellow"><div class="sn" id="st-learning">—</div><div class="sl">学习中</div></div>
+    <div class="stat-card sc-red"><div class="sn" id="st-new">—</div><div class="sl">未学习</div></div>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  <div class="cat-stats">
+    <div class="cat-stat cs1">
+      <div class="cs-head"><span class="cat-badge cb1">1类</span> 核心高频词 (1-120)</div>
+      <div class="cs-bar"><div class="cs-fill" id="cs1-fill" style="width:0%"></div></div>
+      <div class="cs-nums" id="cs1-nums">— / — 已掌握</div>
+    </div>
+    <div class="cat-stat cs2">
+      <div class="cs-head"><span class="cat-badge cb2">2类</span> 次级词汇 (121-376)</div>
+      <div class="cs-bar"><div class="cs-fill" id="cs2-fill" style="width:0%"></div></div>
+      <div class="cs-nums" id="cs2-nums">— / — 已掌握</div>
+    </div>
+    <div class="cat-stat cs3">
+      <div class="cs-head"><span class="cat-badge cb3">3类</span> 同义词/接受词</div>
+      <div class="cs-bar"><div class="cs-fill" id="cs3-fill" style="width:0%"></div></div>
+      <div class="cs-nums" id="cs3-nums">— / — 已掌握</div>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-p" onclick="goFC('all','all')">开始刷卡</button>
+    <button class="btn btn-g" onclick="goFC('1','all')">刷 1类</button>
+    <button class="btn btn-g" onclick="goFC('2','all')">刷 2类</button>
+    <button class="btn btn-g" onclick="goFC('3','all')">刷 3类</button>
+    <button class="btn btn-g" onclick="showPage('quiz')">开始测验</button>
+    <button class="btn btn-g" onclick="goErrDrill()" id="btn-err-drill" style="display:none">错词重刷</button>
+    <button class="btn btn-g" onclick="doReset()" style="color:var(--red);margin-left:auto">重置进度</button>
+  </div>
+  <div class="gap">
+    <h2>最近错误</h2>
+    <div id="err-log" class="empty">暂无错题</div>
+    <div id="err-ans-card" style="display:none"></div>
+  </div>
+</div>
+
+<!-- FLASHCARD -->
+<div class="page" id="page-flashcard">
+  <div class="fc-top">
+    <button class="btn btn-g btn-sm" onclick="showPage('home')">← 返回</button>
+    <div class="pill-row">
+      <button class="pill pa-all active" data-cat="all" onclick="fcSetCat(this)">全部</button>
+      <button class="pill pa-1" data-cat="1" onclick="fcSetCat(this)">1类</button>
+      <button class="pill pa-2" data-cat="2" onclick="fcSetCat(this)">2类</button>
+      <button class="pill pa-3" data-cat="3" onclick="fcSetCat(this)">3类</button>
+    </div>
+    <div class="pill-row">
+      <button class="pill pa-status active" data-st="all" onclick="fcSetSt(this)">全部</button>
+      <button class="pill pa-status" data-st="new" onclick="fcSetSt(this)">未学</button>
+      <button class="pill pa-status" data-st="learning" onclick="fcSetSt(this)">学习中</button>
+      <button class="pill pa-status" data-st="mastered" onclick="fcSetSt(this)">已掌握</button>
+    </div>
+    <label class="fc-auto">
+      <input type="checkbox" id="auto-speak" checked> 自动朗读
+    </label>
+    <button class="btn btn-g btn-sm" onclick="fcShuffle()">随机</button>
+    <button class="btn btn-g btn-sm" onclick="fcReset()">重来</button>
+  </div>
+  <div class="card-area">
+    <div class="flashcard" id="fc-card" onclick="fcFlip()">
+      <div class="cf">
+        <div class="card-tl" id="fc-badge-f"></div>
+        <div class="card-tr" id="fc-num-f"></div>
+        <div class="fc-word" id="fc-word"></div>
+        <div class="fc-hint">点击翻转 · 查看释义</div>
+        <button class="speak-btn" id="speak-btn" onclick="event.stopPropagation();doSpeak()">🔊</button>
+      </div>
+      <div class="cf cf-back">
+        <div class="card-tl" id="fc-badge-b"></div>
+        <div class="card-tr" id="fc-num-b"></div>
+        <div class="fc-meaning" id="fc-meaning"></div>
+        <div class="fc-syns" id="fc-syns"></div>
+        <div class="syn-translation" id="syn-trans"></div>
+        <button class="speak-btn" onclick="event.stopPropagation();doSpeak()">🔊</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-marks" id="card-marks" style="display:none">
+    <button class="btn btn-red" onclick="fcMark('new')">不认识</button>
+    <button class="btn btn-yellow" onclick="fcMark('learning')">模糊</button>
+    <button class="btn btn-green" onclick="fcMark('mastered')">已掌握</button>
+  </div>
+  <div class="fc-nav">
+    <button class="btn btn-g" onclick="fcPrev()">← 上一个</button>
+    <button class="btn btn-g" onclick="fcNext()">下一个 →</button>
+  </div>
+  <div class="fc-prog" id="fc-prog"></div>
+</div>
+
+<!-- QUIZ -->
+<div class="page" id="page-quiz">
+  <div id="qz-setup">
+    <div style="margin-bottom:14px"><button class="btn btn-g btn-sm" onclick="showPage('home')">← 返回</button></div>
+    <h2>测验设置</h2>
+    <div class="quiz-cfg">
+      <div class="cfg-label">题型</div>
+      <div class="q-opts">
+        <button class="qo active" data-t="w2m" onclick="qSetOpt(this,'t')">单词 → 含义</button>
+        <button class="qo" data-t="m2w" onclick="qSetOpt(this,'t')">含义 → 单词</button>
+        <button class="qo" data-t="w2s" onclick="qSetOpt(this,'t')">单词 → 同义词</button>
+      </div>
+      <div class="cfg-label">答题方式</div>
+      <div class="q-opts">
+        <button class="qo active" data-m="choice" onclick="qSetOpt(this,'m')">选择题（4选1）</button>
+        <button class="qo" data-m="fill" onclick="qSetOpt(this,'m')">填空题（手动输入）</button>
+      </div>
+      <div class="cfg-label">类别</div>
+      <div class="q-opts">
+        <button class="qo active" data-c="all" onclick="qSetOpt(this,'c')">全部</button>
+        <button class="qo" data-c="1" onclick="qSetOpt(this,'c')">1类</button>
+        <button class="qo" data-c="2" onclick="qSetOpt(this,'c')">2类</button>
+        <button class="qo" data-c="3" onclick="qSetOpt(this,'c')">3类</button>
+      </div>
+      <div class="cfg-label">状态</div>
+      <div class="q-opts">
+        <button class="qo active" data-s="all" onclick="qSetOpt(this,'s')">全部</button>
+        <button class="qo" data-s="new" onclick="qSetOpt(this,'s')">未学</button>
+        <button class="qo" data-s="learning" onclick="qSetOpt(this,'s')">学习中</button>
+        <button class="qo" data-s="mastered" onclick="qSetOpt(this,'s')">已掌握</button>
+      </div>
+      <div style="margin-top:14px">
+        <button class="btn btn-p" onclick="qStart()">开始测验</button>
+      </div>
+    </div>
+  </div>
+  <div id="qz-game" style="display:none">
+    <div style="margin-bottom:12px;display:flex;align-items:center;gap:10px">
+      <button class="btn btn-g btn-sm" onclick="qShowSetup()">← 返回设置</button>
+      <button class="btn btn-g btn-sm" onclick="showPage('home')">返回总览</button>
+    </div>
+    <div class="q-score">
+      <span>正确 <strong id="qc" style="color:var(--green)">0</strong></span>
+      <span>错误 <strong id="qw" style="color:var(--red)">0</strong></span>
+      <span>剩余 <strong id="qr">0</strong></span>
+    </div>
+    <div class="q-question">
+      <div class="q-ph" id="q-hint"></div>
+      <div class="q-pw" id="q-word"></div>
+    </div>
+    <div class="q-choices" id="q-choices"></div>
+    <div class="spell-wrap" id="spell-wrap" style="display:none">
+      <div class="spell-inputs-wrap" id="spell-inputs-wrap"></div>
+      <div class="spell-hint" id="spell-hint"></div>
+      <div style="text-align:center;margin-top:10px">
+        <button class="btn btn-p" onclick="checkSpell()">提交</button>
+      </div>
+    </div>
+    <div class="q-fb" id="q-fb"></div>
+    <div style="text-align:center">
+      <button class="btn btn-p" id="q-next" onclick="qNext()" style="display:none">下一题</button>
+    </div>
+  </div>
+  <div id="qz-result" style="display:none;text-align:center;padding:40px 0">
+    <div style="font-size:56px;margin-bottom:12px" id="q-emoji">🎉</div>
+    <div style="font-size:22px;font-weight:700;margin-bottom:6px" id="q-rt"></div>
+    <div style="color:var(--muted);margin-bottom:22px" id="q-rs"></div>
+    <div class="actions" style="justify-content:center">
+      <button class="btn btn-p" onclick="qStart()">再来一次</button>
+      <button class="btn btn-g" onclick="qShowSetup()">更换设置</button>
+      <button class="btn btn-g" onclick="showPage('home')">返回总览</button>
+    </div>
+  </div>
+</div>
+
+<!-- WORDS -->
+<div class="page" id="page-words">
+  <h2>单词表</h2>
+  <div class="search-row">
+    <input type="text" id="wl-q" placeholder="搜索单词、含义或同义词..." oninput="renderWL()">
+  </div>
+  <div class="wl-filters">
+    <button class="wf active" data-f="all" onclick="setWF(this)">全部 (<span id="wfc-all">0</span>)</button>
+    <button class="wf" data-f="1" onclick="setWF(this)">1类 (<span id="wfc-1">0</span>)</button>
+    <button class="wf" data-f="2" onclick="setWF(this)">2类 (<span id="wfc-2">0</span>)</button>
+    <button class="wf" data-f="3" onclick="setWF(this)">3类 (<span id="wfc-3">0</span>)</button>
+    <button class="wf" data-f="mastered" onclick="setWF(this)">已掌握 (<span id="wfc-m">0</span>)</button>
+    <button class="wf" data-f="learning" onclick="setWF(this)">学习中 (<span id="wfc-l">0</span>)</button>
+    <button class="wf" data-f="new" onclick="setWF(this)">未学 (<span id="wfc-n">0</span>)</button>
+  </div>
+  <div class="word-table">
+    <div class="wrow hdr">
+      <div>#</div><div>类</div><div>单词</div><div>含义</div><div>同义词</div><div>状态</div>
+    </div>
+    <div id="wl-body"></div>
+  </div>
+</div>
+
+<!-- ERR DRILL -->
+<div class="page" id="page-errdrill">
+  <div id="erd-main">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+      <button class="btn btn-g btn-sm" onclick="showPage('home')">← 返回</button>
+      <div style="font-size:13px;color:var(--muted)" id="erd-prog"></div>
+    </div>
+    <div style="text-align:center;margin-bottom:18px">
+      <div class="fc-word" id="erd-word" style="font-size:36px;font-weight:700;color:var(--accent)"></div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">默写该单词的所有同义词</div>
+    </div>
+    <div id="erd-inputs"></div>
+    <div style="font-size:12px;color:var(--muted);text-align:center;margin-top:6px" id="erd-hint"></div>
+    <div class="err-drill-fb" id="erd-fb"></div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
+      <button class="btn btn-p" id="erd-submit" onclick="checkErdSpell()">提交</button>
+      <button class="btn btn-g" id="erd-next" onclick="erdNext()" style="display:none">下一个</button>
+    </div>
+  </div>
+  <div id="erd-result" style="display:none;text-align:center;padding:40px 0">
+    <div style="font-size:52px;margin-bottom:12px" id="erd-emoji"></div>
+    <div style="font-size:20px;font-weight:700;margin-bottom:6px" id="erd-rt"></div>
+    <div style="color:var(--muted);margin-bottom:22px" id="erd-rs"></div>
+    <div class="actions" style="justify-content:center">
+      <button class="btn btn-p" onclick="startErrDrill()">再刷一遍</button>
+      <button class="btn btn-g" onclick="showPage('home')">返回总览</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const WORDS = [{"num": 1, "word": "resemble", "meaning": "v.像;与……相似", "synonyms": "like;look like;be similar to", "cat": 1}, {"num": 2, "word": "recognize", "meaning": "v.认出;识别；承认", "synonyms": "perceive;acknowledge;realize;appreciate;admit;identify;comprehend;understand;know", "cat": 1}, {"num": 3, "word": "adjust", "meaning": "v.调整;使适合", "synonyms": "change;modify;shift;alter", "cat": 1}, {"num": 4, "word": "approach", "meaning": "n.方法", "synonyms": "method;way", "cat": 1}, {"num": 5, "word": "fundamental", "meaning": "adj.基本的;基础的", "synonyms": "rudimentary;preliminary;basic", "cat": 1}, {"num": 6, "word": "rely on", "meaning": "依靠;依赖", "synonyms": "depend on", "cat": 1}, {"num": 7, "word": "domestic", "meaning": "adj.家庭的；国内的", "synonyms": "home;local;national", "cat": 1}, {"num": 8, "word": "measure", "meaning": "v.测量", "synonyms": "calculate;assess;evaluate", "cat": 1}, {"num": 9, "word": "trait", "meaning": "n.特性;特征", "synonyms": "characteristic;feature;property", "cat": 1}, {"num": 10, "word": "coin", "meaning": "v.创造", "synonyms": "first used;invent", "cat": 1}, {"num": 11, "word": "artificial", "meaning": "adj.人造的，仿造的", "synonyms": "synthetic;man-made", "cat": 1}, {"num": 12, "word": "prompt", "meaning": "v.促进;激起", "synonyms": "initiate;immediately", "cat": 1}, {"num": 13, "word": "exchange", "meaning": "v.交换", "synonyms": "share;apply A to B", "cat": 1}, {"num": 14, "word": "underlie", "meaning": "v.成为.….基础", "synonyms": "based on;ground;root", "cat": 1}, {"num": 15, "word": "ignore", "meaning": "v.忽视;不顾", "synonyms": "neglect;overlook;underestimate", "cat": 1}, {"num": 16, "word": "fertilizer", "meaning": "n.化肥;肥料", "synonyms": "chemical;toxic;unnatural", "cat": 1}, {"num": 17, "word": "that", "meaning": "pron.那；那个", "synonyms": "this;it;they;those;these;such 代词", "cat": 1}, {"num": 18, "word": "and", "meaning": "conj.和;而且", "synonyms": "or;as well as;both…and;not only…but also;other than;in addition;besides;on the one hand…on the other hand…;neither…nor…", "cat": 1}, {"num": 19, "word": "rather than", "meaning": "而非;不是", "synonyms": "but;yet;however;whereas;nonetheless;nevertheless;notwithstanding;although;though;instead", "cat": 1}, {"num": 20, "word": "thanks to", "meaning": "由于;幸亏", "synonyms": "stem from;derive;owing to;due to;according to;because of;on account of;as a result of;leading to;because;since for;in that;as;therefore;hence", "cat": 1}, {"num": 0, "word": "part 2", "meaning": "", "synonyms": "", "cat": 3}, {"num": 21, "word": "diversity", "meaning": "n.多样性;差异", "synonyms": "variety;difference", "cat": 1}, {"num": 22, "word": "detect", "meaning": "v.查明;发现", "synonyms": "look for;find;seek;search", "cat": 1}, {"num": 23, "word": "isolate", "meaning": "v.使隔离;使孤立", "synonyms": "inaccessible", "cat": 1}, {"num": 24, "word": "avoid", "meaning": "v.避免", "synonyms": "escape;evitable", "cat": 1}, {"num": 25, "word": "budget", "meaning": "n.预算", "synonyms": "fund;financial", "cat": 1}, {"num": 26, "word": "adapt to", "meaning": "使适应", "synonyms": "fit;suit", "cat": 1}, {"num": 27, "word": "alternative", "meaning": "adj.供替代的;供选择的     n.替代品", "synonyms": "substitute", "cat": 1}, {"num": 28, "word": "compensate", "meaning": "v.补偿;赔偿", "synonyms": "make up;off set", "cat": 1}, {"num": 29, "word": "component", "meaning": "n.成分;要素", "synonyms": "proportion", "cat": 1}, {"num": 30, "word": "military", "meaning": "adj.军事的", "synonyms": "weapon;army", "cat": 1}, {"num": 31, "word": "criteria", "meaning": "n.标准", "synonyms": "standard", "cat": 1}, {"num": 32, "word": "curriculum", "meaning": "n.课程", "synonyms": "syllabus;course of study", "cat": 1}, {"num": 33, "word": "feasible", "meaning": "adj.可行的", "synonyms": "viable;realistic", "cat": 1}, {"num": 34, "word": "constrain", "meaning": "v.束缚;限制", "synonyms": "stop;control", "cat": 1}, {"num": 35, "word": "deficiency", "meaning": "n.缺陷;缺点", "synonyms": "shortage;defect;weakness", "cat": 1}, {"num": 36, "word": "supplement", "meaning": "v.补充", "synonyms": "provision", "cat": 1}, {"num": 37, "word": "distinguish", "meaning": "v.区别;辨别", "synonyms": "separate;differentiate", "cat": 1}, {"num": 38, "word": "analyze", "meaning": "v.分析;解释", "synonyms": "examine;diagnose", "cat": 1}, {"num": 39, "word": "emphasize", "meaning": "v.强调;着重", "synonyms": "focus on;stress", "cat": 1}, {"num": 40, "word": "enormous", "meaning": "adj.庞大的;巨大的", "synonyms": "massive;large", "cat": 1}, {"num": 41, "word": "imitate", "meaning": "v.模仿", "synonyms": "mimic;copy", "cat": 1}, {"num": 42, "word": "impair", "meaning": "v.削弱;减少", "synonyms": "damage;diminish;decrease", "cat": 1}, {"num": 43, "word": "hinder", "meaning": "v.阻碍", "synonyms": "impede;prevent;deter;obstacle", "cat": 1}, {"num": 44, "word": "legitimate", "meaning": "adj.合法的", "synonyms": "legal", "cat": 1}, {"num": 45, "word": "limitation", "meaning": "n.限制", "synonyms": "restriction", "cat": 1}, {"num": 46, "word": "convention", "meaning": "n.手法；习俗", "synonyms": "method;tradition", "cat": 1}, {"num": 47, "word": "demanding", "meaning": "adj.苛求的", "synonyms": "troublesome", "cat": 1}, {"num": 48, "word": "determine", "meaning": "v.决定", "synonyms": "decide", "cat": 1}, {"num": 49, "word": "accelerate", "meaning": "v.加速;促进；强调", "synonyms": "speed up", "cat": 1}, {"num": 50, "word": "ancient", "meaning": "adj.古代的；古老的", "synonyms": "aged;old", "cat": 1}, {"num": 51, "word": "beneficial", "meaning": "adj.有益的", "synonyms": "helpful;advantageous;wholesome", "cat": 1}, {"num": 52, "word": "chronic", "meaning": "adj.慢性的;长期性的", "synonyms": "lasting", "cat": 1}, {"num": 53, "word": "conscious", "meaning": "v.最小化;使……减到最小", "synonyms": "aware;knowing", "cat": 1}, {"num": 54, "word": "minimize", "meaning": "adj.有意识的;神志清醒的", "synonyms": "reduce;lessen", "cat": 1}, {"num": 55, "word": "immunity", "meaning": "n.免疫力", "synonyms": "resistance", "cat": 1}, {"num": 56, "word": "imperative", "meaning": "adj.必要的;紧急的", "synonyms": "compelling;necessary;urgent", "cat": 1}, {"num": 57, "word": "secrete", "meaning": "v.分泌", "synonyms": "discharge;exude", "cat": 1}, {"num": 58, "word": "exaggerate", "meaning": "v.夸大;夸张", "synonyms": "overstate", "cat": 1}, {"num": 59, "word": "transmit", "meaning": "v.传达;传输", "synonyms": "pass;send;transfer", "cat": 1}, {"num": 60, "word": "extinct", "meaning": "v.灭绝", "synonyms": "die out;lost", "cat": 1}, {"num": 61, "word": "exclusive", "meaning": "adj.独有的；排外的；专一的", "synonyms": "only", "cat": 1}, {"num": 62, "word": "guarantee", "meaning": "v.保证;担保", "synonyms": "assure", "cat": 1}, {"num": 63, "word": "inherit", "meaning": "v.继承", "synonyms": "receive", "cat": 1}, {"num": 64, "word": "witness", "meaning": "n.见证;证据；目击者", "synonyms": "view;see", "cat": 1}, {"num": 65, "word": "magnetic", "meaning": "a#有磁性的", "synonyms": "attractive", "cat": 1}, {"num": 66, "word": "loss", "meaning": "n.减少亏损失败遗失", "synonyms": "waste;gone", "cat": 1}, {"num": 67, "word": "option", "meaning": "n.选择", "synonyms": "choice", "cat": 1}, {"num": 68, "word": "prefer to", "meaning": "更喜欢", "synonyms": "rather", "cat": 1}, {"num": 69, "word": "priority", "meaning": "n.优先权", "synonyms": "preference;preferential", "cat": 1}, {"num": 70, "word": "primary", "meaning": "adj.主要的", "synonyms": "principal;main", "cat": 1}, {"num": 71, "word": "principle", "meaning": "n.原理", "synonyms": "rule", "cat": 1}, {"num": 72, "word": "potential", "meaning": "n.潜能adj.潜在的", "synonyms": "possibility", "cat": 1}, {"num": 73, "word": "quantity", "meaning": "n.量;数量", "synonyms": "number", "cat": 1}, {"num": 74, "word": "settle", "meaning": "v.解决；定居;稳定", "synonyms": "fix;figure out", "cat": 1}, {"num": 75, "word": "sophisticate", "meaning": "v.使复杂", "synonyms": "complicate", "cat": 1}, {"num": 76, "word": "specific", "meaning": "adj.明确的；特殊的", "synonyms": "detailed;particular", "cat": 1}, {"num": 77, "word": "survive", "meaning": "v.存活;幸存", "synonyms": "remain", "cat": 1}, {"num": 78, "word": "swift", "meaning": "adj.迅速的;敏捷的;立刻的", "synonyms": "quick;rapid", "cat": 1}, {"num": 79, "word": "unexpectedly", "meaning": "adv.出乎意料地", "synonyms": "surprising", "cat": 1}, {"num": 80, "word": "surrounding", "meaning": "n.环境", "synonyms": "setting;environment", "cat": 1}, {"num": 81, "word": "attempt", "meaning": "v.试图;尝试", "synonyms": "try;test", "cat": 1}, {"num": 82, "word": "expertise", "meaning": "v.专门技术", "synonyms": "knowledge;skill", "cat": 1}, {"num": 83, "word": "faculty", "meaning": "n.能力;才能；全体教员", "synonyms": "ability", "cat": 1}, {"num": 84, "word": "donate", "meaning": "v.捐赠", "synonyms": "contribute", "cat": 1}, {"num": 85, "word": "dynamics", "meaning": "n.动力学", "synonyms": "energy;force;move", "cat": 1}, {"num": 86, "word": "incentive", "meaning": "n.刺激;鼓励；动机", "synonyms": "motive;stimulus", "cat": 1}, {"num": 87, "word": "mortality", "meaning": "n.死亡率", "synonyms": "death", "cat": 1}, {"num": 88, "word": "peripheral", "meaning": "adj.外围的;次要的", "synonyms": "unimportant;minor", "cat": 1}, {"num": 89, "word": "vicinity", "meaning": "n.邻近;附近", "synonyms": "neighbourhood;nearby", "cat": 1}, {"num": 90, "word": "threaten", "meaning": "v.威胁;危及", "synonyms": "endanger;jeopardize;risk;hazard", "cat": 1}, {"num": 91, "word": "practice", "meaning": "n.实行；练习", "synonyms": "method;exercise", "cat": 1}, {"num": 92, "word": "bacteria", "meaning": "n.细菌", "synonyms": "virus;germ;microbe", "cat": 1}, {"num": 93, "word": "be subject to", "meaning": "受……支配", "synonyms": "face", "cat": 1}, {"num": 94, "word": "be liable to", "meaning": "易于……", "synonyms": "potential", "cat": 1}, {"num": 95, "word": "innate", "meaning": "adj.天生的；内在的;直觉的", "synonyms": "built-in;inborn", "cat": 1}, {"num": 96, "word": "pattern", "meaning": "n.模式", "synonyms": "formation", "cat": 1}, {"num": 97, "word": "therapy", "meaning": "n.治疗;理疗", "synonyms": "treatment", "cat": 1}, {"num": 98, "word": "original", "meaning": "adj.原始的;最初的", "synonyms": "initial;first", "cat": 1}, {"num": 99, "word": "confidential", "meaning": "adj.机密的;秘密的", "synonyms": "undiscovered;secret;hidden", "cat": 1}, {"num": 100, "word": "cognitive", "meaning": "adj.认知的", "synonyms": "mental", "cat": 1}, {"num": 101, "word": "comply with", "meaning": "照做;遵守", "synonyms": "obey", "cat": 1}, {"num": 102, "word": "consult", "meaning": "v.查阅;商量;请教;咨询", "synonyms": "ask for advice", "cat": 1}, {"num": 103, "word": "superior", "meaning": "adj.上级的；优秀的", "synonyms": "higher;upper", "cat": 1}, {"num": 104, "word": "co-operation", "meaning": "n.合作;协作", "synonyms": "support;work together", "cat": 1}, {"num": 105, "word": "co-ordinate", "meaning": "v.使…….协调", "synonyms": "organize;harmonize", "cat": 1}, {"num": 106, "word": "differ", "meaning": "v.使……相异；使….不同", "synonyms": "vary", "cat": 1}, {"num": 107, "word": "cue", "meaning": "n.线索", "synonyms": "hint;clue", "cat": 1}, {"num": 108, "word": "signal", "meaning": "n.信号", "synonyms": "symbol;mark;sign", "cat": 1}, {"num": 109, "word": "abandon", "meaning": "v.放弃;遗弃", "synonyms": "quit;give up;forsake;derelict", "cat": 1}, {"num": 10, "word": "halt", "meaning": "n.停止", "synonyms": "stop;quit", "cat": 1}, {"num": 11, "word": "fragile", "meaning": "adj.脆弱的", "synonyms": "vulnerable", "cat": 1}, {"num": 12, "word": "retain", "meaning": "v.记住", "synonyms": "maintain", "cat": 1}, {"num": 13, "word": "vanish", "meaning": "v.消失;绝迹", "synonyms": "disappear", "cat": 1}, {"num": 14, "word": "delivery", "meaning": "n.递送", "synonyms": "send", "cat": 1}, {"num": 15, "word": "erode", "meaning": "v.侵蚀", "synonyms": "rust;damage", "cat": 1}, {"num": 16, "word": "induce", "meaning": "v.引起;引诱", "synonyms": "cause;lead to", "cat": 1}, {"num": 17, "word": "stable", "meaning": "adj.稳定的", "synonyms": "constant;unchanged", "cat": 1}, {"num": 18, "word": "integrate", "meaning": "v.使……成整体", "synonyms": "combine;whole", "cat": 1}, {"num": 19, "word": "equal", "meaning": "adj.平等的；相等的；胜任的", "synonyms": "fair;even", "cat": 1}, {"num": 120, "word": "grant", "meaning": "v.拨款；授予", "synonyms": "offer", "cat": 1}, {"num": 0, "word": "part 3", "meaning": "", "synonyms": "", "cat": 3}, {"num": 121, "word": "accumulate", "meaning": "v.累积;积聚", "synonyms": "gather", "cat": 2}, {"num": 122, "word": "addictive", "meaning": "adj.上瘾的", "synonyms": "habit", "cat": 2}, {"num": 123, "word": "adversity", "meaning": "n.逆境;不幸", "synonyms": "trouble", "cat": 2}, {"num": 124, "word": "aggression", "meaning": "v.侵犯;侵害", "synonyms": "attack", "cat": 2}, {"num": 125, "word": "agreeable", "meaning": "adj.令人愉快的", "synonyms": "pleasant", "cat": 2}, {"num": 126, "word": "aid", "meaning": "n.援助;帮助", "synonyms": "help", "cat": 2}, {"num": 127, "word": "allergic", "meaning": "adj.过敏的；对……极讨厌的", "synonyms": "irritate", "cat": 2}, {"num": 128, "word": "altitude", "meaning": "n.高度；海拔", "synonyms": "height", "cat": 2}, {"num": 129, "word": "application", "meaning": "n.应用", "synonyms": "utilization", "cat": 2}, {"num": 130, "word": "approve", "meaning": "v.批准", "synonyms": "agree", "cat": 2}, {"num": 131, "word": "array", "meaning": "n.排列；大批", "synonyms": "order", "cat": 2}, {"num": 132, "word": "assign", "meaning": "v.分配；指派", "synonyms": "allocate", "cat": 2}, {"num": 133, "word": "association", "meaning": "n.协会;联盟；联系", "synonyms": "union", "cat": 2}, {"num": 134, "word": "attitude", "meaning": "n.看法;态度", "synonyms": "opinion", "cat": 2}, {"num": 135, "word": "authority", "meaning": "n.当局;权威", "synonyms": "government", "cat": 2}, {"num": 136, "word": "be consistent with", "meaning": "与…….致", "synonyms": "compatible", "cat": 2}, {"num": 137, "word": "bear", "meaning": "v.承担；忍受", "synonyms": "tolerate", "cat": 2}, {"num": 138, "word": "blight", "meaning": "v.损害；枯萎", "synonyms": "destroy", "cat": 2}, {"num": 139, "word": "boundary", "meaning": "n.边界；底线", "synonyms": "barrier", "cat": 2}, {"num": 140, "word": "bungle", "meaning": "v.搞糟;拙劣地工作", "synonyms": "mishandle", "cat": 2}, {"num": 141, "word": "burden", "meaning": "n.负担", "synonyms": "load", "cat": 2}, {"num": 142, "word": "calamity", "meaning": "n.灾难", "synonyms": "disaster", "cat": 2}, {"num": 143, "word": "capacity", "meaning": "n.容量", "synonyms": "volume", "cat": 2}, {"num": 144, "word": "catastrophic", "meaning": "adj.灾难的", "synonyms": "disastrous", "cat": 2}, {"num": 145, "word": "cater", "meaning": "v.迎合；满足需要", "synonyms": "serve", "cat": 2}, {"num": 146, "word": "certify", "meaning": "v.证明;保证", "synonyms": "verify", "cat": 2}, {"num": 147, "word": "civic", "meaning": "adj.市民的", "synonyms": "municipal", "cat": 2}, {"num": 148, "word": "comment", "meaning": "n.评论；意见", "synonyms": "remark", "cat": 2}, {"num": 149, "word": "commitment", "meaning": "n.承诺;许诺;义务；致力", "synonyms": "engagement", "cat": 2}, {"num": 150, "word": "communal", "meaning": "adj.公共的;公社的", "synonyms": "public", "cat": 2}, {"num": 151, "word": "commute", "meaning": "v.通勤；用.….交换", "synonyms": "travel", "cat": 2}, {"num": 152, "word": "compare", "meaning": "v.与….相比较", "synonyms": "contrast", "cat": 2}, {"num": 153, "word": "conceal", "meaning": "v.隐藏；隐瞒", "synonyms": "hide", "cat": 2}, {"num": 154, "word": "concentrate", "meaning": "v.专心于；集中", "synonyms": "focus", "cat": 2}, {"num": 155, "word": "concur", "meaning": "v.同意", "synonyms": "agree", "cat": 2}, {"num": 156, "word": "confer", "meaning": "v.授予;给予", "synonyms": "grant", "cat": 2}, {"num": 157, "word": "conflict", "meaning": "n.冲突;矛盾", "synonyms": "unharmonious", "cat": 2}, {"num": 158, "word": "confuse", "meaning": "v.使混乱;使迷惑", "synonyms": "puzzle", "cat": 2}, {"num": 159, "word": "conservative", "meaning": "adj.保守的", "synonyms": "traditional", "cat": 2}, {"num": 160, "word": "considerable", "meaning": "adj相当大的;重要的", "synonyms": "significant", "cat": 2}, {"num": 161, "word": "contingent", "meaning": "adj.因情况而异的", "synonyms": "uncertain", "cat": 2}, {"num": 162, "word": "controversial", "meaning": "adj.有争论的", "synonyms": "disputable", "cat": 2}, {"num": 163, "word": "correlation", "meaning": "n.相关;关联", "synonyms": "link", "cat": 2}, {"num": 164, "word": "courtship", "meaning": "n.求爱（时期）", "synonyms": "mate", "cat": 2}, {"num": 165, "word": "crash", "meaning": "n.碰撞", "synonyms": "collapse", "cat": 2}, {"num": 166, "word": "credibility", "meaning": "n.可信性", "synonyms": "reliance", "cat": 2}, {"num": 167, "word": "criminal", "meaning": "n.罪犯;犯人", "synonyms": "conviction", "cat": 2}, {"num": 168, "word": "crisis", "meaning": "n.危机", "synonyms": "risk", "cat": 2}, {"num": 169, "word": "criticism", "meaning": "n.批评", "synonyms": "condemn", "cat": 2}, {"num": 170, "word": "curb", "meaning": "v.限制、抑制", "synonyms": "restrict", "cat": 2}, {"num": 171, "word": "damp", "meaning": "adj.潮湿的", "synonyms": "wet", "cat": 2}, {"num": 172, "word": "dazzle", "meaning": "v.使目眩；使……眼花", "synonyms": "flash", "cat": 2}, {"num": 173, "word": "deadline", "meaning": "n.最后期限", "synonyms": "limit", "cat": 2}, {"num": 174, "word": "delay", "meaning": "n.延期;耽搁", "synonyms": "postpone", "cat": 2}, {"num": 175, "word": "democratic", "meaning": "adj.民主的", "synonyms": "republic", "cat": 2}, {"num": 176, "word": "demographic", "meaning": "adj.人口统计学的;人口学的", "synonyms": "population statistic", "cat": 2}, {"num": 177, "word": "dental", "meaning": "adj.牙科的，牙齿的", "synonyms": "teeth", "cat": 2}, {"num": 178, "word": "depression", "meaning": "n.抑郁;沮丧", "synonyms": "frustration", "cat": 2}, {"num": 179, "word": "designate", "meaning": "v.指定;指派;标出", "synonyms": "appoint", "cat": 2}, {"num": 180, "word": "detain", "meaning": "v.留住", "synonyms": "hold", "cat": 2}, {"num": 181, "word": "devastate", "meaning": "v.毁坏;毁灭", "synonyms": "wreck", "cat": 2}, {"num": 182, "word": "disclose", "meaning": "v.公开；揭露", "synonyms": "expose", "cat": 2}, {"num": 183, "word": "disparate", "meaning": "adj.不同的", "synonyms": "different", "cat": 2}, {"num": 184, "word": "display", "meaning": "v.显示", "synonyms": "show", "cat": 2}, {"num": 185, "word": "disrupt", "meaning": "v.破坏", "synonyms": "destroy", "cat": 2}, {"num": 186, "word": "distract", "meaning": "v.转移;分心", "synonyms": "divert", "cat": 2}, {"num": 187, "word": "distribute", "meaning": "v.分配;分发", "synonyms": "spread", "cat": 2}, {"num": 188, "word": "documentation", "meaning": "n.文件；文献", "synonyms": "record", "cat": 2}, {"num": 189, "word": "domain", "meaning": "n.领域", "synonyms": "field", "cat": 2}, {"num": 190, "word": "dominate", "meaning": "adj.占优势的;占支配地位的", "synonyms": "overbearing", "cat": 2}, {"num": 191, "word": "dramatic", "meaning": "adj.戏剧化的；激动人心的；引人注意的", "synonyms": "striking", "cat": 2}, {"num": 192, "word": "drought", "meaning": "n.干旱", "synonyms": "dry", "cat": 2}, {"num": 193, "word": "durable", "meaning": "adj.持久的", "synonyms": "lasting", "cat": 2}, {"num": 194, "word": "eco-friendly", "meaning": "adj.生态友好的环保的", "synonyms": "environmentally-friendly", "cat": 2}, {"num": 195, "word": "elaborate", "meaning": "v.详细阐述;详细叙述", "synonyms": "illustrate", "cat": 2}, {"num": 196, "word": "elderly", "meaning": "adj.高龄的", "synonyms": "aged", "cat": 2}, {"num": 197, "word": "eliminate", "meaning": "v.消除;排除", "synonyms": "dispose", "cat": 2}, {"num": 198, "word": "elusive", "meaning": "adj.难懂的；行踪隐秘的", "synonyms": "hard", "cat": 2}, {"num": 199, "word": "encyclopedia", "meaning": "n.百科全书", "synonyms": "entire range of knowledge", "cat": 2}, {"num": 200, "word": "entrepreneur", "meaning": "n.企业家", "synonyms": "boss", "cat": 2}, {"num": 201, "word": "equator", "meaning": "n.赤道", "synonyms": "geography", "cat": 2}, {"num": 202, "word": "erratically", "meaning": "adv.不定地;无规", "synonyms": "unpredictably", "cat": 2}, {"num": 203, "word": "established", "meaning": "adj.确定的；已制定的;已建立的", "synonyms": "built", "cat": 2}, {"num": 204, "word": "estate", "meaning": "n.房地产", "synonyms": "property", "cat": 2}, {"num": 205, "word": "ethical", "meaning": "adj.道德的", "synonyms": "moral", "cat": 2}, {"num": 206, "word": "eventually", "meaning": "adv.最后;终于", "synonyms": "finally", "cat": 2}, {"num": 207, "word": "evidence", "meaning": "n.迹象；证据", "synonyms": "proof", "cat": 2}, {"num": 208, "word": "evolve", "meaning": "v.进化;发展；逐渐形成", "synonyms": "develop", "cat": 2}, {"num": 209, "word": "exceptional", "meaning": "adj.异常的;出色的", "synonyms": "extreme;utmost", "cat": 2}, {"num": 210, "word": "exhausted", "meaning": "adj.疲惫的;耗尽的", "synonyms": "fatigue", "cat": 2}, {"num": 21, "word": "experiment", "meaning": "n.实验;试验", "synonyms": "test", "cat": 1}, {"num": 212, "word": "explicit", "meaning": "adj.明确的", "synonyms": "clear", "cat": 2}, {"num": 213, "word": "exploit", "meaning": "v.开发;利用", "synonyms": "use", "cat": 2}, {"num": 214, "word": "extend", "meaning": "v.扩展;延伸;推广", "synonyms": "expand", "cat": 2}, {"num": 215, "word": "extract", "meaning": "v.提取", "synonyms": "quotation", "cat": 2}, {"num": 216, "word": "famine", "meaning": "n.饥荒", "synonyms": "hunger", "cat": 2}, {"num": 217, "word": "finite", "meaning": "adj.有限的", "synonyms": "limited", "cat": 2}, {"num": 218, "word": "fitness", "meaning": "n.健康", "synonyms": "heath", "cat": 2}, {"num": 219, "word": "foe", "meaning": "n.危害物", "synonyms": "enemy", "cat": 2}, {"num": 220, "word": "format", "meaning": "n.格式", "synonyms": "structure", "cat": 2}, {"num": 221, "word": "fragment", "meaning": "n.碎片", "synonyms": "piece", "cat": 2}, {"num": 222, "word": "freeze", "meaning": "n.冰冻;冻结", "synonyms": "chill", "cat": 2}, {"num": 223, "word": "fulfill", "meaning": "v.满足;实现", "synonyms": "execute", "cat": 2}, {"num": 224, "word": "gene", "meaning": "n.基因", "synonyms": "factor", "cat": 2}, {"num": 225, "word": "gifted", "meaning": "adj.有天赋的;有才华的", "synonyms": "talented", "cat": 2}, {"num": 226, "word": "graphic", "meaning": "adj.形象的；图解的", "synonyms": "picture", "cat": 2}, {"num": 227, "word": "habitat", "meaning": "n.栖息地;住处", "synonyms": "residence", "cat": 2}, {"num": 228, "word": "harbour", "meaning": "v.怀有 n.海港", "synonyms": "hold", "cat": 2}, {"num": 229, "word": "hardship", "meaning": "n.困苦；苦难", "synonyms": "difficult", "cat": 2}, {"num": 230, "word": "harsh", "meaning": "adj.艰难的；严酷的", "synonyms": "rough", "cat": 2}, {"num": 231, "word": "hypothesis", "meaning": "n.假设", "synonyms": "assumption", "cat": 2}, {"num": 232, "word": "impact", "meaning": "n.影响", "synonyms": "influence", "cat": 2}, {"num": 233, "word": "impressive", "meaning": "adj.感人的；给人", "synonyms": "touching", "cat": 2}, {"num": 234, "word": "in accordance with", "meaning": "依照", "synonyms": "conform", "cat": 2}, {"num": 235, "word": "inaccurate", "meaning": "adj.错误的", "synonyms": "incorrect", "cat": 2}, {"num": 236, "word": "inactive", "meaning": "adj.不活跃的", "synonyms": "passive", "cat": 2}, {"num": 237, "word": "inappropriate", "meaning": "adj.不适当的", "synonyms": "hard", "cat": 2}, {"num": 238, "word": "indulge", "meaning": "v.沉溺（于）", "synonyms": "spoil", "cat": 2}, {"num": 239, "word": "infest", "meaning": "v.侵害；寄生于", "synonyms": "plague", "cat": 2}, {"num": 240, "word": "installment", "meaning": "n.安装；分期付款", "synonyms": "payment on its completion", "cat": 2}, {"num": 241, "word": "intelligence", "meaning": "n.智力", "synonyms": "mind", "cat": 2}, {"num": 242, "word": "intense", "meaning": "adj;紧张的", "synonyms": "strong", "cat": 2}, {"num": 243, "word": "interaction", "meaning": "n.相互作用;交流互动", "synonyms": "social activities", "cat": 2}, {"num": 244, "word": "interference", "meaning": "n.干涉", "synonyms": "interdependence", "cat": 2}, {"num": 245, "word": "interior", "meaning": "adj.内部的", "synonyms": "inner", "cat": 2}, {"num": 246, "word": "interrupt", "meaning": "v.中断", "synonyms": "stop", "cat": 2}, {"num": 247, "word": "introverted", "meaning": "adj.内向的;含蓄的", "synonyms": "shyness", "cat": 2}, {"num": 248, "word": "involve", "meaning": "v.包含;牵涉", "synonyms": "associate", "cat": 2}, {"num": 249, "word": "keen", "meaning": "adj.热切的；急迫的;强烈的", "synonyms": "strong", "cat": 2}, {"num": 250, "word": "label", "meaning": "v.打上标签", "synonyms": "display", "cat": 2}, {"num": 251, "word": "lack", "meaning": "v.缺乏；不足", "synonyms": "shortage", "cat": 2}, {"num": 252, "word": "landscape", "meaning": "n.风景", "synonyms": "scene", "cat": 2}, {"num": 253, "word": "likelihood", "meaning": "n.可能性", "synonyms": "chance", "cat": 2}, {"num": 254, "word": "limb", "meaning": "n.四肢", "synonyms": "arm or leg", "cat": 2}, {"num": 255, "word": "linguistic", "meaning": "adj.语言（学）的", "synonyms": "language", "cat": 2}, {"num": 256, "word": "log", "meaning": "v.记录原木", "synonyms": "record", "cat": 2}, {"num": 257, "word": "look-in", "meaning": "n.成功的机会", "synonyms": "opportunity;chance", "cat": 2}, {"num": 258, "word": "lopsided", "meaning": "adj.不平衡的", "synonyms": "uneven", "cat": 2}, {"num": 259, "word": "mainly", "meaning": "adv.主要地;大体上", "synonyms": "primary", "cat": 2}, {"num": 260, "word": "malfunction", "meaning": "v.发生故障；不起作用", "synonyms": "breakdown", "cat": 2}, {"num": 261, "word": "mammal", "meaning": "n.哺乳动物", "synonyms": "creature", "cat": 2}, {"num": 262, "word": "manage to do", "meaning": "设法完成某事", "synonyms": "success", "cat": 2}, {"num": 263, "word": "manifest", "meaning": "v.出现;表现", "synonyms": "obvious", "cat": 2}, {"num": 264, "word": "manufacture", "meaning": "n.生产", "synonyms": "produce", "cat": 2}, {"num": 265, "word": "marine", "meaning": "adj.海产的；航海的;海运的", "synonyms": "sea", "cat": 2}, {"num": 266, "word": "mate", "meaning": "n.配偶", "synonyms": "spouse", "cat": 2}, {"num": 267, "word": "mechanism", "meaning": "n.机制;原理", "synonyms": "method", "cat": 2}, {"num": 268, "word": "mental", "meaning": "adj.精神的;心理的", "synonyms": "intelligent", "cat": 2}, {"num": 269, "word": "mercury", "meaning": "n.汞;水银", "synonyms": "liquid metal", "cat": 2}, {"num": 270, "word": "meteorology", "meaning": "adj.气象学的", "synonyms": "weather", "cat": 2}, {"num": 271, "word": "migrate", "meaning": "v.转移;迁移", "synonyms": "move", "cat": 2}, {"num": 272, "word": "moisture", "meaning": "n.水分;湿度", "synonyms": "humidity", "cat": 2}, {"num": 273, "word": "monitor", "meaning": "v.监控", "synonyms": "surveillance", "cat": 2}, {"num": 274, "word": "motif", "meaning": "n.主题；图形", "synonyms": "theme", "cat": 2}, {"num": 275, "word": "mould", "meaning": "v.模压;塑造；塑造成", "synonyms": "form", "cat": 2}, {"num": 276, "word": "native", "meaning": "adj.本国的；土著的；天然的", "synonyms": "original", "cat": 2}, {"num": 277, "word": "nocturnal", "meaning": "adj.夜间的;夜间发生的", "synonyms": "night", "cat": 2}, {"num": 278, "word": "norm", "meaning": "n.规范", "synonyms": "regulation", "cat": 2}, {"num": 279, "word": "notoriety", "meaning": "n.名声", "synonyms": "famous", "cat": 2}, {"num": 280, "word": "objective", "meaning": "n.目标adj.客观的", "synonyms": "goal", "cat": 2}, {"num": 281, "word": "obligation", "meaning": "n.义务", "synonyms": "responsibility", "cat": 2}, {"num": 282, "word": "obscure", "meaning": "v.掩盖;使模糊不清", "synonyms": "hide", "cat": 2}, {"num": 283, "word": "obtain", "meaning": "v.获得", "synonyms": "get", "cat": 2}, {"num": 284, "word": "odd", "meaning": "adj.古怪的", "synonyms": "strange", "cat": 2}, {"num": 285, "word": "odour", "meaning": "n.气味", "synonyms": "smell", "cat": 2}, {"num": 286, "word": "offensive", "meaning": "adj.冒犯的;无礼的", "synonyms": "hostile", "cat": 2}, {"num": 287, "word": "official", "meaning": "adj;官方的", "synonyms": "authority", "cat": 2}, {"num": 288, "word": "optimum", "meaning": "n.最佳效果adj.最适宜的", "synonyms": "best", "cat": 2}, {"num": 289, "word": "ordinary", "meaning": "adj.普通的平凡的；平常的", "synonyms": "common", "cat": 2}, {"num": 290, "word": "organ", "meaning": "n.器官；机构", "synonyms": "a part of body", "cat": 2}, {"num": 291, "word": "out of question", "meaning": "不可能", "synonyms": "impossible", "cat": 2}, {"num": 292, "word": "overcome", "meaning": "v.克服", "synonyms": "defeat", "cat": 2}, {"num": 293, "word": "overtake", "meaning": "v.赶上", "synonyms": "surpass", "cat": 2}, {"num": 294, "word": "paralyse", "meaning": "v.使麻痹；使.….瘫痪", "synonyms": "cannot e move", "cat": 2}, {"num": 295, "word": "paramount", "meaning": "最重要的;主要的", "synonyms": "principal", "cat": 2}, {"num": 296, "word": "participate", "meaning": "v.参加", "synonyms": "join", "cat": 2}, {"num": 297, "word": "patient", "meaning": "n.容忍的病人；患者", "synonyms": "repetitive", "cat": 2}, {"num": 298, "word": "peak", "meaning": "adj.有耐性的", "synonyms": "top", "cat": 2}, {"num": 299, "word": "permit", "meaning": "n.最局峰;顶点v.使达到顶峰", "synonyms": "allow", "cat": 2}, {"num": 300, "word": "persuade", "meaning": "n.许可证;执照v.许可", "synonyms": "influence", "cat": 2}, {"num": 301, "word": "pessimistic", "meaning": "v.说服;劝说", "synonyms": "negative", "cat": 2}, {"num": 302, "word": "phase", "meaning": "adj.悲观的", "synonyms": "process", "cat": 2}, {"num": 303, "word": "physical", "meaning": "n.阶段", "synonyms": "body", "cat": 2}, {"num": 304, "word": "plagiarise", "meaning": "adj.身体上的;物质的", "synonyms": "copy", "cat": 2}, {"num": 305, "word": "plenty of", "meaning": "v.抄袭", "synonyms": "many", "cat": 2}, {"num": 306, "word": "plot", "meaning": "adj.大量的", "synonyms": "plan", "cat": 2}, {"num": 307, "word": "pose", "meaning": "v.提出;造成;形成", "synonyms": "cause", "cat": 2}, {"num": 308, "word": "portable", "meaning": "adj.便携的", "synonyms": "conveyable", "cat": 2}, {"num": 309, "word": "poverty", "meaning": "n.贫穷", "synonyms": "poor", "cat": 2}, {"num": 310, "word": "praise", "meaning": "v.赞扬", "synonyms": "commend", "cat": 2}, {"num": 31, "word": "predict", "meaning": "v.预测;预知", "synonyms": "expect", "cat": 1}, {"num": 312, "word": "pressing", "meaning": "adj.迫切的", "synonyms": "urgent", "cat": 2}, {"num": 313, "word": "private", "meaning": "adj.私人的", "synonyms": "personal", "cat": 2}, {"num": 314, "word": "prohibit", "meaning": "v.禁止", "synonyms": "not allowed", "cat": 2}, {"num": 315, "word": "prolong", "meaning": "v.拉长;延长", "synonyms": "extend", "cat": 2}, {"num": 316, "word": "promote", "meaning": "v.促进;推销", "synonyms": "improve", "cat": 2}, {"num": 317, "word": "prosper", "meaning": "v.使成功;使繁荣", "synonyms": "success", "cat": 2}, {"num": 318, "word": "purify", "meaning": "v.净化", "synonyms": "clean", "cat": 2}, {"num": 319, "word": "qualify", "meaning": "v.取得资格", "synonyms": "fulfill", "cat": 2}, {"num": 320, "word": "radical", "meaning": "adj.彻底的根本的", "synonyms": "utmost", "cat": 2}, {"num": 321, "word": "range", "meaning": "n.范围幅度", "synonyms": "scope", "cat": 2}, {"num": 322, "word": "rare", "meaning": "adj.稀有的", "synonyms": "unusual", "cat": 2}, {"num": 323, "word": "rate", "meaning": "n.等级v.评估", "synonyms": "rank;measure", "cat": 2}, {"num": 324, "word": "react", "meaning": "v.反应", "synonyms": "respond", "cat": 2}, {"num": 325, "word": "recreation", "meaning": "n.娱乐;消遣", "synonyms": "entertainment", "cat": 2}, {"num": 326, "word": "reduction", "meaning": "n.下降;减少", "synonyms": "decrease", "cat": 2}, {"num": 327, "word": "refer to", "meaning": "指（的是）;涉及;提及", "synonyms": "talk about", "cat": 2}, {"num": 328, "word": "rehearsal", "meaning": "n.排演；预演练习", "synonyms": "preparation", "cat": 2}, {"num": 329, "word": "reject", "meaning": "v.*拒绝;排斥;丢弃", "synonyms": "exclude", "cat": 2}, {"num": 330, "word": "relevant", "meaning": "adj.相关的", "synonyms": "relative", "cat": 2}, {"num": 331, "word": "religious", "meaning": "adj.峰宗教的；虔钺的", "synonyms": "sacred", "cat": 2}, {"num": 332, "word": "reluctant", "meaning": "adj.不情愿的", "synonyms": "unwilling", "cat": 2}, {"num": 333, "word": "reproduce", "meaning": "v.繁殖", "synonyms": "breed", "cat": 2}, {"num": 334, "word": "responsible", "meaning": "adj.负责的;可靠的；有责任的", "synonyms": "liable", "cat": 2}, {"num": 335, "word": "revision", "meaning": "n.修正", "synonyms": "editing", "cat": 2}, {"num": 336, "word": "revive", "meaning": "v.使复苏;恢复", "synonyms": "renaissance", "cat": 2}, {"num": 337, "word": "ruin", "meaning": "v.毁灭", "synonyms": "destroy", "cat": 2}, {"num": 338, "word": "scenic", "meaning": "adj.风景优美的", "synonyms": "beautiful", "cat": 2}, {"num": 339, "word": "shade", "meaning": "n.遮阳；阴影", "synonyms": "shelter", "cat": 2}, {"num": 340, "word": "skepticism", "meaning": "n.怀疑", "synonyms": "doubt", "cat": 2}, {"num": 341, "word": "soar", "meaning": "v.激增", "synonyms": "increase", "cat": 2}, {"num": 342, "word": "solely", "meaning": "adv.唯一地", "synonyms": "alone", "cat": 2}, {"num": 343, "word": "solicitor", "meaning": "n.律师", "synonyms": "lawyer", "cat": 2}, {"num": 344, "word": "steer", "meaning": "v.控制;引导", "synonyms": "manage", "cat": 2}, {"num": 345, "word": "stimulate", "meaning": "v.刺激;激励", "synonyms": "motivate", "cat": 2}, {"num": 346, "word": "stride", "meaning": "n;进展", "synonyms": "progress", "cat": 2}, {"num": 347, "word": "succumb", "meaning": "vi.屈服", "synonyms": "yield", "cat": 2}, {"num": 348, "word": "subdivide", "meaning": "v.把…….细分", "synonyms": "break down", "cat": 2}, {"num": 349, "word": "subtle", "meaning": "adj.微妙的", "synonyms": "delicate", "cat": 2}, {"num": 350, "word": "substance", "meaning": "n.物质；实质", "synonyms": "matter", "cat": 2}, {"num": 351, "word": "sufficiency", "meaning": "n.足量;充足", "synonyms": "enough", "cat": 2}, {"num": 352, "word": "supersede", "meaning": "v.取代;代替", "synonyms": "replace", "cat": 2}, {"num": 353, "word": "suppress", "meaning": "v.抑制；隐瞒", "synonyms": "hold", "cat": 2}, {"num": 354, "word": "supremacy", "meaning": "n.至高无上的地位", "synonyms": "priority", "cat": 2}, {"num": 355, "word": "suspicious", "meaning": "adj.可疑的", "synonyms": "odd", "cat": 2}, {"num": 356, "word": "sustainable", "meaning": "adj.可持续的", "synonyms": "long-term", "cat": 2}, {"num": 357, "word": "symptom", "meaning": "n.症状;征兆", "synonyms": "sign", "cat": 2}, {"num": 358, "word": "tension", "meaning": "n.紧张;不安", "synonyms": "upset", "cat": 2}, {"num": 359, "word": "term", "meaning": "n.自始至终", "synonyms": "word", "cat": 2}, {"num": 360, "word": "throughout", "meaning": "adv.全部遍及", "synonyms": "anywhere", "cat": 2}, {"num": 361, "word": "toll", "meaning": "n.通行费v.征收", "synonyms": "charge", "cat": 2}, {"num": 362, "word": "trace", "meaning": "n.追溯；痕迹", "synonyms": "track", "cat": 2}, {"num": 363, "word": "transcend", "meaning": "v.胜过;超越", "synonyms": "excel", "cat": 2}, {"num": 364, "word": "transmit", "meaning": "v.运输；经过;传送", "synonyms": "send", "cat": 2}, {"num": 365, "word": "tremendous", "meaning": "adj.巨大的;惊人的", "synonyms": "vast", "cat": 2}, {"num": 366, "word": "trigger", "meaning": "n.触发;引发引起", "synonyms": "begin", "cat": 2}, {"num": 367, "word": "tropical", "meaning": "adj热带的", "synonyms": "hot", "cat": 2}, {"num": 368, "word": "unbiased", "meaning": "adj.公正的;无偏见的", "synonyms": "fair", "cat": 2}, {"num": 369, "word": "uniform", "meaning": "adj.本始终如的", "synonyms": "consistent", "cat": 2}, {"num": 370, "word": "valuable", "meaning": "adj.叫宝贵的;有价值的", "synonyms": "benefit", "cat": 2}, {"num": 371, "word": "versatile", "meaning": "adj.沉多功能的", "synonyms": "all-around", "cat": 2}, {"num": 372, "word": "view", "meaning": "v.看", "synonyms": "overlook", "cat": 2}, {"num": 373, "word": "violent", "meaning": "adj.暴力的；猛烈的", "synonyms": "fierce", "cat": 2}, {"num": 374, "word": "visible", "meaning": "adj.明显的;看得见的", "synonyms": "see", "cat": 2}, {"num": 375, "word": "visual", "meaning": "adj.视觉的", "synonyms": "image", "cat": 2}, {"num": 376, "word": "well-being", "meaning": "n.健康;康乐", "synonyms": "health", "cat": 2}, {"num": 0, "word": "calculate", "meaning": "v. 计算；估计", "synonyms": "", "cat": 3}, {"num": 0, "word": "consistent", "meaning": "adj. 一致的；连贯的", "synonyms": "", "cat": 3}, {"num": 0, "word": "change", "meaning": "v. 改变；变化", "synonyms": "", "cat": 3}, {"num": 0, "word": "characteristic", "meaning": "n. 特征；特性 adj. 典型的", "synonyms": "", "cat": 3}, {"num": 0, "word": "clue", "meaning": "n. 线索；提示", "synonyms": "", "cat": 3}, {"num": 0, "word": "collapse", "meaning": "v/n. 崩溃；倒塌", "synonyms": "", "cat": 3}, {"num": 0, "word": "all-around", "meaning": "adj. 全面的", "synonyms": "", "cat": 3}, {"num": 0, "word": "overlook", "meaning": "v. 忽视；俯瞰", "synonyms": "", "cat": 3}, {"num": 0, "word": "compatible", "meaning": "adj. 兼容的；相容的", "synonyms": "", "cat": 3}, {"num": 0, "word": "complicate", "meaning": "v. 使复杂化", "synonyms": "", "cat": 3}, {"num": 0, "word": "comprehend", "meaning": "v. 理解；领会", "synonyms": "", "cat": 3}, {"num": 0, "word": "condemn", "meaning": "v. 谴责；判刑", "synonyms": "", "cat": 3}, {"num": 0, "word": "image", "meaning": "n. 图像；形象", "synonyms": "", "cat": 3}, {"num": 0, "word": "health", "meaning": "n. 健康", "synonyms": "", "cat": 3}, {"num": 0, "word": "contrast", "meaning": "n/v. 对比；对照", "synonyms": "", "cat": 3}, {"num": 0, "word": "contribute", "meaning": "v. 贡献；有助于", "synonyms": "", "cat": 3}, {"num": 0, "word": "conviction", "meaning": "n. 定罪；信念", "synonyms": "", "cat": 3}, {"num": 0, "word": "defeat", "meaning": "v/n. 打败；挫败", "synonyms": "", "cat": 3}, {"num": 0, "word": "acknowledge", "meaning": "v. 承认；认可", "synonyms": "", "cat": 3}, {"num": 0, "word": "defect", "meaning": "n. 缺陷；缺点", "synonyms": "", "cat": 3}, {"num": 0, "word": "delicate", "meaning": "adj. 精细的；微妙的", "synonyms": "", "cat": 3}, {"num": 0, "word": "admit", "meaning": "v. 承认；允许进入", "synonyms": "", "cat": 3}, {"num": 0, "word": "depend on", "meaning": "依靠；取决于", "synonyms": "", "cat": 3}, {"num": 0, "word": "derive", "meaning": "v. 源于；获得", "synonyms": "", "cat": 3}, {"num": 0, "word": "allocate", "meaning": "v. 分配；分派", "synonyms": "", "cat": 3}, {"num": 0, "word": "alter", "meaning": "v. 改变；修改", "synonyms": "", "cat": 3}, {"num": 0, "word": "detailed", "meaning": "adj. 详细的", "synonyms": "", "cat": 3}, {"num": 0, "word": "deter", "meaning": "v. 阻止；威慑", "synonyms": "", "cat": 3}, {"num": 0, "word": "diagnose", "meaning": "v. 诊断", "synonyms": "", "cat": 3}, {"num": 0, "word": "appreciate", "meaning": "v. 欣赏；感激；理解", "synonyms": "", "cat": 3}, {"num": 0, "word": "differentiate", "meaning": "v. 区分；区别对待", "synonyms": "", "cat": 3}, {"num": 0, "word": "diminish", "meaning": "v. 减少；降低", "synonyms": "", "cat": 3}, {"num": 0, "word": "disaster", "meaning": "n. 灾难；灾祸", "synonyms": "", "cat": 3}, {"num": 0, "word": "discharge", "meaning": "v. 排放；释放", "synonyms": "", "cat": 3}, {"num": 0, "word": "assumption", "meaning": "n. 假设；假定", "synonyms": "", "cat": 3}, {"num": 0, "word": "assure", "meaning": "v. 保证；确保", "synonyms": "", "cat": 3}, {"num": 0, "word": "divert", "meaning": "v. 转移；使分心", "synonyms": "", "cat": 3}, {"num": 0, "word": "aware", "meaning": "adj. 意识到的；知道的", "synonyms": "", "cat": 3}, {"num": 0, "word": "barrier", "meaning": "n. 障碍；屏障", "synonyms": "", "cat": 3}, {"num": 0, "word": "based on", "meaning": "基于；以...为基础", "synonyms": "", "cat": 3}, {"num": 0, "word": "dominant", "meaning": "adj. 占主导地位的", "synonyms": "", "cat": 3}, {"num": 0, "word": "be consistent", "meaning": "保持一致", "synonyms": "", "cat": 3}, {"num": 0, "word": "endanger", "meaning": "v. 危及；使危险", "synonyms": "", "cat": 3}, {"num": 0, "word": "engagement", "meaning": "n. 约定；参与", "synonyms": "", "cat": 3}, {"num": 0, "word": "entertainment", "meaning": "n. 娱乐；消遣", "synonyms": "", "cat": 3}, {"num": 0, "word": "environment", "meaning": "n. 环境", "synonyms": "", "cat": 3}, {"num": 0, "word": "invent", "meaning": "v. 发明；创造", "synonyms": "", "cat": 3}, {"num": 0, "word": "jeopardize", "meaning": "v. 危及；损害", "synonyms": "", "cat": 3}, {"num": 0, "word": "escape", "meaning": "v/n. 逃脱；逃避", "synonyms": "", "cat": 3}, {"num": 0, "word": "legal", "meaning": "adj. 合法的；法律的", "synonyms": "", "cat": 3}, {"num": 0, "word": "evaluate", "meaning": "v. 评估；评价", "synonyms": "", "cat": 3}, {"num": 0, "word": "even", "meaning": "adj. 均匀的；adv. 甚至", "synonyms": "", "cat": 3}, {"num": 0, "word": "evitable", "meaning": "adj. 可避免的", "synonyms": "", "cat": 3}, {"num": 0, "word": "excel", "meaning": "v. 擅长；优于", "synonyms": "", "cat": 3}, {"num": 0, "word": "link", "meaning": "v/n. 联系；连接", "synonyms": "", "cat": 3}, {"num": 0, "word": "exclude", "meaning": "v. 排除；不包括", "synonyms": "", "cat": 3}, {"num": 0, "word": "main", "meaning": "adj. 主要的；最重要的", "synonyms": "", "cat": 3}, {"num": 0, "word": "execute", "meaning": "v. 执行；实施", "synonyms": "", "cat": 3}, {"num": 0, "word": "expect", "meaning": "v. 期望；预期", "synonyms": "", "cat": 3}, {"num": 0, "word": "make up", "meaning": "弥补；构成", "synonyms": "", "cat": 3}, {"num": 0, "word": "expose", "meaning": "v. 暴露；揭露", "synonyms": "", "cat": 3}, {"num": 0, "word": "massive", "meaning": "adj. 大量的；巨大的", "synonyms": "", "cat": 3}, {"num": 0, "word": "extreme", "meaning": "adj. 极端的；极度的", "synonyms": "", "cat": 3}, {"num": 0, "word": "exude", "meaning": "v. 渗出；散发", "synonyms": "", "cat": 3}, {"num": 0, "word": "fair", "meaning": "adj. 公平的；合理的", "synonyms": "", "cat": 3}, {"num": 0, "word": "fatigue", "meaning": "n. 疲劳；疲倦", "synonyms": "", "cat": 3}, {"num": 0, "word": "feature", "meaning": "n. 特征；特色 v. 以...为特色", "synonyms": "", "cat": 3}, {"num": 0, "word": "method", "meaning": "n. 方法；方式", "synonyms": "", "cat": 3}, {"num": 0, "word": "microbe", "meaning": "n. 微生物；细菌", "synonyms": "", "cat": 3}, {"num": 0, "word": "financial", "meaning": "adj. 财务的；金融的", "synonyms": "", "cat": 3}, {"num": 0, "word": "fit", "meaning": "v. 适合；合身 adj. 健康的", "synonyms": "", "cat": 3}, {"num": 0, "word": "mimic", "meaning": "v. 模仿", "synonyms": "", "cat": 3}, {"num": 0, "word": "modify", "meaning": "v. 修改；调整", "synonyms": "", "cat": 3}, {"num": 0, "word": "focus on", "meaning": "专注于；集中在", "synonyms": "", "cat": 3}, {"num": 0, "word": "moral", "meaning": "adj. 道德的 n. 寓意", "synonyms": "", "cat": 3}, {"num": 0, "word": "frustration", "meaning": "n. 挫折；沮丧", "synonyms": "", "cat": 3}, {"num": 0, "word": "motivate", "meaning": "v. 激励；激发", "synonyms": "", "cat": 3}, {"num": 0, "word": "motive", "meaning": "n. 动机；目的", "synonyms": "", "cat": 3}, {"num": 0, "word": "municipal", "meaning": "adj. 市政的；地方的", "synonyms": "", "cat": 3}, {"num": 0, "word": "necessary", "meaning": "adj. 必要的；必需的", "synonyms": "", "cat": 3}, {"num": 0, "word": "neglect", "meaning": "v/n. 忽视；疏忽", "synonyms": "", "cat": 3}, {"num": 0, "word": "obey", "meaning": "v. 服从；遵守", "synonyms": "", "cat": 3}, {"num": 0, "word": "obstacle", "meaning": "n. 障碍；阻碍", "synonyms": "", "cat": 3}, {"num": 0, "word": "hazard", "meaning": "n. 危险；冒险", "synonyms": "", "cat": 3}, {"num": 0, "word": "hint", "meaning": "n. 提示；暗示", "synonyms": "", "cat": 3}, {"num": 0, "word": "hostile", "meaning": "adj. 敌对的；不友好的", "synonyms": "", "cat": 3}, {"num": 0, "word": "offset", "meaning": "v. 抵消；补偿", "synonyms": "", "cat": 3}, {"num": 0, "word": "only", "meaning": "adj. 唯一的 adv. 仅仅", "synonyms": "", "cat": 3}, {"num": 0, "word": "opportunity", "meaning": "n. 机会；时机", "synonyms": "", "cat": 3}, {"num": 0, "word": "identify", "meaning": "v. 识别；认出", "synonyms": "", "cat": 3}, {"num": 0, "word": "illustrate", "meaning": "v. 说明；举例", "synonyms": "", "cat": 3}, {"num": 0, "word": "organize", "meaning": "v. 组织；安排", "synonyms": "", "cat": 3}, {"num": 0, "word": "immediately", "meaning": "adv. 立即；马上", "synonyms": "", "cat": 3}, {"num": 0, "word": "impede", "meaning": "v. 阻碍；妨碍", "synonyms": "", "cat": 3}, {"num": 0, "word": "question", "meaning": "", "synonyms": "", "cat": 3}, {"num": 0, "word": "inaccessible", "meaning": "adj. 难以接近的；难以获得的", "synonyms": "", "cat": 3}, {"num": 0, "word": "particular", "meaning": "adj. 特定的；特别的 n. 细节", "synonyms": "", "cat": 3}, {"num": 0, "word": "perceive", "meaning": "v. 感知；理解", "synonyms": "", "cat": 3}, {"num": 0, "word": "initial", "meaning": "adj. 初始的；最初的", "synonyms": "", "cat": 3}, {"num": 0, "word": "initiate", "meaning": "v. 开始；发起", "synonyms": "", "cat": 3}, {"num": 0, "word": "plague", "meaning": "v/n. 困扰；瘟疫", "synonyms": "", "cat": 3}, {"num": 0, "word": "surveillance", "meaning": "n. 监视；监控", "synonyms": "", "cat": 3}, {"num": 0, "word": "postpone", "meaning": "v. 推迟；延期", "synonyms": "", "cat": 3}, {"num": 0, "word": "syllabus", "meaning": "n. 教学大纲", "synonyms": "", "cat": 3}, {"num": 0, "word": "symbol", "meaning": "n. 符号；象征", "synonyms": "", "cat": 3}, {"num": 0, "word": "synthetic", "meaning": "adj. 合成的；综合的", "synonyms": "", "cat": 3}, {"num": 0, "word": "talented", "meaning": "adj. 有天赋的；才华横溢的", "synonyms": "", "cat": 3}, {"num": 0, "word": "preference", "meaning": "n. 偏好；优先", "synonyms": "", "cat": 3}, {"num": 0, "word": "preliminary", "meaning": "adj. 初步的；预备的", "synonyms": "", "cat": 3}, {"num": 0, "word": "theme", "meaning": "n. 主题；话题", "synonyms": "", "cat": 3}, {"num": 0, "word": "prevent", "meaning": "v. 防止；预防", "synonyms": "", "cat": 3}, {"num": 0, "word": "principal", "meaning": "adj. 主要的 n. 校长", "synonyms": "", "cat": 3}, {"num": 0, "word": "tolerate", "meaning": "v. 容忍；忍受", "synonyms": "", "cat": 3}, {"num": 0, "word": "toxic", "meaning": "adj. 有毒的；毒性的", "synonyms": "", "cat": 3}, {"num": 0, "word": "track", "meaning": "v/n. 追踪；轨道", "synonyms": "", "cat": 3}, {"num": 0, "word": "proof", "meaning": "n. 证明；证据", "synonyms": "", "cat": 3}, {"num": 0, "word": "property", "meaning": "n. 财产；特性", "synonyms": "", "cat": 3}, {"num": 0, "word": "transit", "meaning": "n/v. 过渡；运输", "synonyms": "", "cat": 3}, {"num": 0, "word": "proportion", "meaning": "n. 比例；部分", "synonyms": "", "cat": 3}, {"num": 0, "word": "provision", "meaning": "n. 供应；规定", "synonyms": "", "cat": 3}, {"num": 0, "word": "puzzle", "meaning": "v. 困惑；难倒 n. 谜题", "synonyms": "", "cat": 3}, {"num": 0, "word": "quotation", "meaning": "n. 引用；报价", "synonyms": "", "cat": 3}, {"num": 0, "word": "underestimate", "meaning": "v. 低估", "synonyms": "", "cat": 3}, {"num": 0, "word": "utilization", "meaning": "n. 利用；使用", "synonyms": "", "cat": 3}, {"num": 0, "word": "variety", "meaning": "n. 多样性；种类", "synonyms": "", "cat": 3}, {"num": 0, "word": "rather", "meaning": "adv. 相当；宁可", "synonyms": "", "cat": 3}, {"num": 0, "word": "realistic", "meaning": "adj. 现实的；实际的", "synonyms": "", "cat": 3}, {"num": 0, "word": "vary", "meaning": "v. 变化；不同", "synonyms": "", "cat": 3}, {"num": 0, "word": "vast", "meaning": "adj. 广阔的；巨大的", "synonyms": "", "cat": 3}, {"num": 0, "word": "viable", "meaning": "adj. 可行的；能存活的", "synonyms": "", "cat": 3}, {"num": 0, "word": "realize", "meaning": "v. 意识到；实现", "synonyms": "", "cat": 3}, {"num": 0, "word": "record", "meaning": "v/n. 记录", "synonyms": "", "cat": 3}, {"num": 0, "word": "virus", "meaning": "n. 病毒", "synonyms": "", "cat": 3}, {"num": 0, "word": "regulation", "meaning": "n. 规定；法规", "synonyms": "", "cat": 3}, {"num": 0, "word": "volume", "meaning": "n. 体积；音量；卷", "synonyms": "", "cat": 3}, {"num": 0, "word": "vulnerable", "meaning": "adj. 脆弱的；易受伤的", "synonyms": "", "cat": 3}, {"num": 0, "word": "relative", "meaning": "adj. 相对的 n. 亲戚", "synonyms": "", "cat": 3}, {"num": 0, "word": "reliance", "meaning": "n. 依赖；信任", "synonyms": "", "cat": 3}, {"num": 0, "word": "wholesome", "meaning": "adj. 有益的；健全的", "synonyms": "", "cat": 3}, {"num": 0, "word": "wreck", "meaning": "v/n. 破坏；残骸", "synonyms": "", "cat": 3}, {"num": 0, "word": "replace", "meaning": "v. 替代；取代", "synonyms": "", "cat": 3}, {"num": 0, "word": "yield", "meaning": "v. 产生；屈服 n. 产量", "synonyms": "", "cat": 3}, {"num": 0, "word": "resistance", "meaning": "n. 抵抗；阻力", "synonyms": "", "cat": 3}, {"num": 0, "word": "respond", "meaning": "v. 回应；反应", "synonyms": "", "cat": 3}, {"num": 0, "word": "restriction", "meaning": "n. 限制；约束", "synonyms": "", "cat": 3}, {"num": 0, "word": "risk", "meaning": "n/v. 风险；冒险", "synonyms": "", "cat": 3}, {"num": 0, "word": "rudimentary", "meaning": "adj. 基本的；初步的", "synonyms": "", "cat": 3}, {"num": 0, "word": "scope", "meaning": "n. 范围；机会", "synonyms": "", "cat": 3}, {"num": 0, "word": "seek", "meaning": "v. 寻找；寻求", "synonyms": "", "cat": 3}, {"num": 0, "word": "setting", "meaning": "n. 环境；背景", "synonyms": "", "cat": 3}, {"num": 0, "word": "shelter", "meaning": "n/v. 庇护；遮蔽", "synonyms": "", "cat": 3}, {"num": 0, "word": "shift", "meaning": "v/n. 转移；变化", "synonyms": "", "cat": 3}, {"num": 0, "word": "similar", "meaning": "adj. 相似的；类似的", "synonyms": "", "cat": 3}, {"num": 0, "word": "spoil", "meaning": "v. 破坏；溺爱", "synonyms": "", "cat": 3}, {"num": 0, "word": "spouse", "meaning": "n. 配偶", "synonyms": "", "cat": 3}, {"num": 0, "word": "standard", "meaning": "n/adj. 标准；规范", "synonyms": "", "cat": 3}, {"num": 0, "word": "stem from", "meaning": "源于；起因于", "synonyms": "", "cat": 3}, {"num": 0, "word": "stimulus", "meaning": "n. 刺激；激励", "synonyms": "", "cat": 3}, {"num": 0, "word": "stress", "meaning": "v/n. 强调；压力", "synonyms": "", "cat": 3}, {"num": 0, "word": "substitute", "meaning": "v/n. 替代；代替品", "synonyms": "", "cat": 3}, {"num": 0, "word": "suit", "meaning": "v. 适合 n. 套装", "synonyms": "", "cat": 3}, {"num": 0, "word": "surpass", "meaning": "v. 超越；超过", "synonyms": "", "cat": 3}];
+const DICT = {"resemble": "v.像;与……相似", "recognize": "v.认出;识别；承认", "adjust": "v.调整;使适合", "approach": "n.方法", "fundamental": "adj.基本的;基础的", "rely on": "依靠;依赖", "domestic": "adj.家庭的；国内的", "measure": "v.测量", "trait": "n.特性;特征", "coin": "v.创造", "artificial": "adj.人造的，仿造的", "prompt": "v.促进;激起", "exchange": "v.交换", "underlie": "v.成为.….基础", "ignore": "v.忽视;不顾", "fertilizer": "n.化肥;肥料", "that": "pron.那；那个", "and": "conj.和;而且", "rather than": "而非;不是", "thanks to": "由于;幸亏", "diversity": "n.多样性;差异", "detect": "v.查明;发现", "isolate": "v.使隔离;使孤立", "avoid": "v.避免", "budget": "n.预算", "adapt to": "使适应", "alternative": "adj.供替代的;供选择的     n.替代品", "compensate": "v.补偿;赔偿", "component": "n.成分;要素", "military": "adj.军事的", "criteria": "n.标准", "curriculum": "n.课程", "feasible": "adj.可行的", "constrain": "v.束缚;限制", "deficiency": "n.缺陷;缺点", "supplement": "v.补充", "distinguish": "v.区别;辨别", "analyze": "v.分析;解释", "emphasize": "v.强调;着重", "enormous": "adj.庞大的;巨大的", "imitate": "v.模仿", "impair": "v.削弱;减少", "hinder": "v.阻碍", "legitimate": "adj.合法的", "limitation": "n.限制", "convention": "n.手法；习俗", "demanding": "adj.苛求的", "determine": "v.决定", "accelerate": "v.加速;促进；强调", "ancient": "adj.古代的；古老的", "beneficial": "adj.有益的", "chronic": "adj.慢性的;长期性的", "conscious": "v.最小化;使……减到最小", "minimize": "adj.有意识的;神志清醒的", "immunity": "n.免疫力", "imperative": "adj.必要的;紧急的", "secrete": "v.分泌", "exaggerate": "v.夸大;夸张", "transmit": "v.运输；经过;传送", "extinct": "v.灭绝", "exclusive": "adj.独有的；排外的；专一的", "guarantee": "v.保证;担保", "inherit": "v.继承", "witness": "n.见证;证据；目击者", "magnetic": "a#有磁性的", "loss": "n.减少亏损失败遗失", "option": "n.选择", "prefer to": "更喜欢", "priority": "n.优先权", "primary": "adj.主要的", "principle": "n.原理", "potential": "n.潜能adj.潜在的", "quantity": "n.量;数量", "settle": "v.解决；定居;稳定", "sophisticate": "v.使复杂", "specific": "adj.明确的；特殊的", "survive": "v.存活;幸存", "swift": "adj.迅速的;敏捷的;立刻的", "unexpectedly": "adv.出乎意料地", "surrounding": "n.环境", "attempt": "v.试图;尝试", "expertise": "v.专门技术", "faculty": "n.能力;才能；全体教员", "donate": "v.捐赠", "dynamics": "n.动力学", "incentive": "n.刺激;鼓励；动机", "mortality": "n.死亡率", "peripheral": "adj.外围的;次要的", "vicinity": "n.邻近;附近", "threaten": "v.威胁;危及", "practice": "n.实行；练习", "bacteria": "n.细菌", "be subject to": "受……支配", "be liable to": "易于……", "innate": "adj.天生的；内在的;直觉的", "pattern": "n.模式", "therapy": "n.治疗;理疗", "original": "adj.原始的;最初的", "confidential": "adj.机密的;秘密的", "cognitive": "adj.认知的", "comply with": "照做;遵守", "consult": "v.查阅;商量;请教;咨询", "superior": "adj.上级的；优秀的", "co-operation": "n.合作;协作", "co-ordinate": "v.使…….协调", "differ": "v.使……相异；使….不同", "cue": "n.线索", "signal": "n.信号", "abandon": "v.放弃;遗弃", "halt": "n.停止", "fragile": "adj.脆弱的", "retain": "v.记住", "vanish": "v.消失;绝迹", "delivery": "n.递送", "erode": "v.侵蚀", "induce": "v.引起;引诱", "stable": "adj.稳定的", "integrate": "v.使……成整体", "equal": "adj.平等的；相等的；胜任的", "grant": "v.拨款；授予", "accumulate": "v.累积;积聚", "addictive": "adj.上瘾的", "adversity": "n.逆境;不幸", "aggression": "v.侵犯;侵害", "agreeable": "adj.令人愉快的", "aid": "n.援助;帮助", "allergic": "adj.过敏的；对……极讨厌的", "altitude": "n.高度；海拔", "application": "n.应用", "approve": "v.批准", "array": "n.排列；大批", "assign": "v.分配；指派", "association": "n.协会;联盟；联系", "attitude": "n.看法;态度", "authority": "n.当局;权威", "be consistent with": "与…….致", "bear": "v.承担；忍受", "blight": "v.损害；枯萎", "boundary": "n.边界；底线", "bungle": "v.搞糟;拙劣地工作", "burden": "n.负担", "calamity": "n.灾难", "capacity": "n.容量", "catastrophic": "adj.灾难的", "cater": "v.迎合；满足需要", "certify": "v.证明;保证", "civic": "adj.市民的", "comment": "n.评论；意见", "commitment": "n.承诺;许诺;义务；致力", "communal": "adj.公共的;公社的", "commute": "v.通勤；用.….交换", "compare": "v.与….相比较", "conceal": "v.隐藏；隐瞒", "concentrate": "v.专心于；集中", "concur": "v.同意", "confer": "v.授予;给予", "conflict": "n.冲突;矛盾", "confuse": "v.使混乱;使迷惑", "conservative": "adj.保守的", "considerable": "adj相当大的;重要的", "contingent": "adj.因情况而异的", "controversial": "adj.有争论的", "correlation": "n.相关;关联", "courtship": "n.求爱（时期）", "crash": "n.碰撞", "credibility": "n.可信性", "criminal": "n.罪犯;犯人", "crisis": "n.危机", "criticism": "n.批评", "curb": "v.限制、抑制", "damp": "adj.潮湿的", "dazzle": "v.使目眩；使……眼花", "deadline": "n.最后期限", "delay": "n.延期;耽搁", "democratic": "adj.民主的", "demographic": "adj.人口统计学的;人口学的", "dental": "adj.牙科的，牙齿的", "depression": "n.抑郁;沮丧", "designate": "v.指定;指派;标出", "detain": "v.留住", "devastate": "v.毁坏;毁灭", "disclose": "v.公开；揭露", "disparate": "adj.不同的", "display": "v.显示", "disrupt": "v.破坏", "distract": "v.转移;分心", "distribute": "v.分配;分发", "documentation": "n.文件；文献", "domain": "n.领域", "dominate": "adj.占优势的;占支配地位的", "dramatic": "adj.戏剧化的；激动人心的；引人注意的", "drought": "n.干旱", "durable": "adj.持久的", "eco-friendly": "adj.生态友好的环保的", "elaborate": "v.详细阐述;详细叙述", "elderly": "adj.高龄的", "eliminate": "v.消除;排除", "elusive": "adj.难懂的；行踪隐秘的", "encyclopedia": "n.百科全书", "entrepreneur": "n.企业家", "equator": "n.赤道", "erratically": "adv.不定地;无规", "established": "adj.确定的；已制定的;已建立的", "estate": "n.房地产", "ethical": "adj.道德的", "eventually": "adv.最后;终于", "evidence": "n.迹象；证据", "evolve": "v.进化;发展；逐渐形成", "exceptional": "adj.异常的;出色的", "exhausted": "adj.疲惫的;耗尽的", "experiment": "n.实验;试验", "explicit": "adj.明确的", "exploit": "v.开发;利用", "extend": "v.扩展;延伸;推广", "extract": "v.提取", "famine": "n.饥荒", "finite": "adj.有限的", "fitness": "n.健康", "foe": "n.危害物", "format": "n.格式", "fragment": "n.碎片", "freeze": "n.冰冻;冻结", "fulfill": "v.满足;实现", "gene": "n.基因", "gifted": "adj.有天赋的;有才华的", "graphic": "adj.形象的；图解的", "habitat": "n.栖息地;住处", "harbour": "v.怀有 n.海港", "hardship": "n.困苦；苦难", "harsh": "adj.艰难的；严酷的", "hypothesis": "n.假设", "impact": "n.影响", "impressive": "adj.感人的；给人", "in accordance with": "依照", "inaccurate": "adj.错误的", "inactive": "adj.不活跃的", "inappropriate": "adj.不适当的", "indulge": "v.沉溺（于）", "infest": "v.侵害；寄生于", "installment": "n.安装；分期付款", "intelligence": "n.智力", "intense": "adj;紧张的", "interaction": "n.相互作用;交流互动", "interference": "n.干涉", "interior": "adj.内部的", "interrupt": "v.中断", "introverted": "adj.内向的;含蓄的", "involve": "v.包含;牵涉", "keen": "adj.热切的；急迫的;强烈的", "label": "v.打上标签", "lack": "v.缺乏；不足", "landscape": "n.风景", "likelihood": "n.可能性", "limb": "n.四肢", "linguistic": "adj.语言（学）的", "log": "v.记录原木", "look-in": "n.成功的机会", "lopsided": "adj.不平衡的", "mainly": "adv.主要地;大体上", "malfunction": "v.发生故障；不起作用", "mammal": "n.哺乳动物", "manage to do": "设法完成某事", "manifest": "v.出现;表现", "manufacture": "n.生产", "marine": "adj.海产的；航海的;海运的", "mate": "n.配偶", "mechanism": "n.机制;原理", "mental": "adj.精神的;心理的", "mercury": "n.汞;水银", "meteorology": "adj.气象学的", "migrate": "v.转移;迁移", "moisture": "n.水分;湿度", "monitor": "v.监控", "motif": "n.主题；图形", "mould": "v.模压;塑造；塑造成", "native": "adj.本国的；土著的；天然的", "nocturnal": "adj.夜间的;夜间发生的", "norm": "n.规范", "notoriety": "n.名声", "objective": "n.目标adj.客观的", "obligation": "n.义务", "obscure": "v.掩盖;使模糊不清", "obtain": "v.获得", "odd": "adj.古怪的", "odour": "n.气味", "offensive": "adj.冒犯的;无礼的", "official": "adj;官方的", "optimum": "n.最佳效果adj.最适宜的", "ordinary": "adj.普通的平凡的；平常的", "organ": "n.器官；机构", "out of question": "不可能", "overcome": "v.克服", "overtake": "v.赶上", "paralyse": "v.使麻痹；使.….瘫痪", "paramount": "最重要的;主要的", "participate": "v.参加", "patient": "n.容忍的病人；患者", "peak": "adj.有耐性的", "permit": "n.最局峰;顶点v.使达到顶峰", "persuade": "n.许可证;执照v.许可", "pessimistic": "v.说服;劝说", "phase": "adj.悲观的", "physical": "n.阶段", "plagiarise": "adj.身体上的;物质的", "plenty of": "v.抄袭", "plot": "adj.大量的", "pose": "v.提出;造成;形成", "portable": "adj.便携的", "poverty": "n.贫穷", "praise": "v.赞扬", "predict": "v.预测;预知", "pressing": "adj.迫切的", "private": "adj.私人的", "prohibit": "v.禁止", "prolong": "v.拉长;延长", "promote": "v.促进;推销", "prosper": "v.使成功;使繁荣", "purify": "v.净化", "qualify": "v.取得资格", "radical": "adj.彻底的根本的", "range": "n.范围幅度", "rare": "adj.稀有的", "rate": "n.等级v.评估", "react": "v.反应", "recreation": "n.娱乐;消遣", "reduction": "n.下降;减少", "refer to": "指（的是）;涉及;提及", "rehearsal": "n.排演；预演练习", "reject": "v.*拒绝;排斥;丢弃", "relevant": "adj.相关的", "religious": "adj.峰宗教的；虔钺的", "reluctant": "adj.不情愿的", "reproduce": "v.繁殖", "responsible": "adj.负责的;可靠的；有责任的", "revision": "n.修正", "revive": "v.使复苏;恢复", "ruin": "v.毁灭", "scenic": "adj.风景优美的", "shade": "n.遮阳；阴影", "skepticism": "n.怀疑", "soar": "v.激增", "solely": "adv.唯一地", "solicitor": "n.律师", "steer": "v.控制;引导", "stimulate": "v.刺激;激励", "stride": "n;进展", "succumb": "vi.屈服", "subdivide": "v.把…….细分", "subtle": "adj.微妙的", "substance": "n.物质；实质", "sufficiency": "n.足量;充足", "supersede": "v.取代;代替", "suppress": "v.抑制；隐瞒", "supremacy": "n.至高无上的地位", "suspicious": "adj.可疑的", "sustainable": "adj.可持续的", "symptom": "n.症状;征兆", "tension": "n.紧张;不安", "term": "n.自始至终", "throughout": "adv.全部遍及", "toll": "n.通行费v.征收", "trace": "n.追溯；痕迹", "transcend": "v.胜过;超越", "tremendous": "adj.巨大的;惊人的", "trigger": "n.触发;引发引起", "tropical": "adj热带的", "unbiased": "adj.公正的;无偏见的", "uniform": "adj.本始终如的", "valuable": "adj.叫宝贵的;有价值的", "versatile": "adj.沉多功能的", "view": "v.看", "violent": "adj.暴力的；猛烈的", "visible": "adj.明显的;看得见的", "visual": "adj.视觉的", "well-being": "n.健康;康乐", "calculate": "v. 计算；估计", "consistent": "adj. 一致的；连贯的", "change": "v. 改变；变化", "characteristic": "n. 特征；特性 adj. 典型的", "clue": "n. 线索；提示", "collapse": "v/n. 崩溃；倒塌", "all-around": "adj. 全面的", "overlook": "v. 忽视；俯瞰", "compatible": "adj. 兼容的；相容的", "complicate": "v. 使复杂化", "comprehend": "v. 理解；领会", "condemn": "v. 谴责；判刑", "image": "n. 图像；形象", "health": "n. 健康", "contrast": "n/v. 对比；对照", "contribute": "v. 贡献；有助于", "conviction": "n. 定罪；信念", "defeat": "v/n. 打败；挫败", "acknowledge": "v. 承认；认可", "defect": "n. 缺陷；缺点", "delicate": "adj. 精细的；微妙的", "admit": "v. 承认；允许进入", "depend on": "依靠；取决于", "derive": "v. 源于；获得", "allocate": "v. 分配；分派", "alter": "v. 改变；修改", "detailed": "adj. 详细的", "deter": "v. 阻止；威慑", "diagnose": "v. 诊断", "appreciate": "v. 欣赏；感激；理解", "differentiate": "v. 区分；区别对待", "diminish": "v. 减少；降低", "disaster": "n. 灾难；灾祸", "discharge": "v. 排放；释放", "assumption": "n. 假设；假定", "assure": "v. 保证；确保", "divert": "v. 转移；使分心", "aware": "adj. 意识到的；知道的", "barrier": "n. 障碍；屏障", "based on": "基于；以...为基础", "dominant": "adj. 占主导地位的", "be consistent": "保持一致", "endanger": "v. 危及；使危险", "engagement": "n. 约定；参与", "entertainment": "n. 娱乐；消遣", "environment": "n. 环境", "invent": "v. 发明；创造", "jeopardize": "v. 危及；损害", "escape": "v/n. 逃脱；逃避", "legal": "adj. 合法的；法律的", "evaluate": "v. 评估；评价", "even": "adj. 均匀的；adv. 甚至", "evitable": "adj. 可避免的", "excel": "v. 擅长；优于", "link": "v/n. 联系；连接", "exclude": "v. 排除；不包括", "main": "adj. 主要的；最重要的", "execute": "v. 执行；实施", "expect": "v. 期望；预期", "make up": "弥补；构成", "expose": "v. 暴露；揭露", "massive": "adj. 大量的；巨大的", "extreme": "adj. 极端的；极度的", "exude": "v. 渗出；散发", "fair": "adj. 公平的；合理的", "fatigue": "n. 疲劳；疲倦", "feature": "n. 特征；特色 v. 以...为特色", "method": "n. 方法；方式", "microbe": "n. 微生物；细菌", "financial": "adj. 财务的；金融的", "fit": "v. 适合；合身 adj. 健康的", "mimic": "v. 模仿", "modify": "v. 修改；调整", "focus on": "专注于；集中在", "moral": "adj. 道德的 n. 寓意", "frustration": "n. 挫折；沮丧", "motivate": "v. 激励；激发", "motive": "n. 动机；目的", "municipal": "adj. 市政的；地方的", "necessary": "adj. 必要的；必需的", "neglect": "v/n. 忽视；疏忽", "obey": "v. 服从；遵守", "obstacle": "n. 障碍；阻碍", "hazard": "n. 危险；冒险", "hint": "n. 提示；暗示", "hostile": "adj. 敌对的；不友好的", "offset": "v. 抵消；补偿", "only": "adj. 唯一的 adv. 仅仅", "opportunity": "n. 机会；时机", "identify": "v. 识别；认出", "illustrate": "v. 说明；举例", "organize": "v. 组织；安排", "immediately": "adv. 立即；马上", "impede": "v. 阻碍；妨碍", "inaccessible": "adj. 难以接近的；难以获得的", "particular": "adj. 特定的；特别的 n. 细节", "perceive": "v. 感知；理解", "initial": "adj. 初始的；最初的", "initiate": "v. 开始；发起", "plague": "v/n. 困扰；瘟疫", "surveillance": "n. 监视；监控", "postpone": "v. 推迟；延期", "syllabus": "n. 教学大纲", "symbol": "n. 符号；象征", "synthetic": "adj. 合成的；综合的", "talented": "adj. 有天赋的；才华横溢的", "preference": "n. 偏好；优先", "preliminary": "adj. 初步的；预备的", "theme": "n. 主题；话题", "prevent": "v. 防止；预防", "principal": "adj. 主要的 n. 校长", "tolerate": "v. 容忍；忍受", "toxic": "adj. 有毒的；毒性的", "track": "v/n. 追踪；轨道", "proof": "n. 证明；证据", "property": "n. 财产；特性", "transit": "n/v. 过渡；运输", "proportion": "n. 比例；部分", "provision": "n. 供应；规定", "puzzle": "v. 困惑；难倒 n. 谜题", "quotation": "n. 引用；报价", "underestimate": "v. 低估", "utilization": "n. 利用；使用", "variety": "n. 多样性；种类", "rather": "adv. 相当；宁可", "realistic": "adj. 现实的；实际的", "vary": "v. 变化；不同", "vast": "adj. 广阔的；巨大的", "viable": "adj. 可行的；能存活的", "realize": "v. 意识到；实现", "record": "v/n. 记录", "virus": "n. 病毒", "regulation": "n. 规定；法规", "volume": "n. 体积；音量；卷", "vulnerable": "adj. 脆弱的；易受伤的", "relative": "adj. 相对的 n. 亲戚", "reliance": "n. 依赖；信任", "wholesome": "adj. 有益的；健全的", "wreck": "v/n. 破坏；残骸", "replace": "v. 替代；取代", "yield": "v. 产生；屈服 n. 产量", "resistance": "n. 抵抗；阻力", "respond": "v. 回应；反应", "restriction": "n. 限制；约束", "risk": "n/v. 风险；冒险", "rudimentary": "adj. 基本的；初步的", "scope": "n. 范围；机会", "seek": "v. 寻找；寻求", "setting": "n. 环境；背景", "shelter": "n/v. 庇护；遮蔽", "shift": "v/n. 转移；变化", "similar": "adj. 相似的；类似的", "spoil": "v. 破坏；溺爱", "spouse": "n. 配偶", "standard": "n/adj. 标准；规范", "stem from": "源于；起因于", "stimulus": "n. 刺激；激励", "stress": "v/n. 强调；压力", "substitute": "v/n. 替代；代替品", "suit": "v. 适合 n. 套装", "surpass": "v. 超越；超过"};  // word→meaning lookup
+
+let _n = 377;
+WORDS.forEach(w => { if (w.cat === 3 && !w.num) w.num = _n++; });
+
+let prog = JSON.parse(localStorage.getItem('ielts2_prog') || '{}');
+let errLog = JSON.parse(localStorage.getItem('ielts2_err') || '[]');
+function save() { localStorage.setItem('ielts2_prog', JSON.stringify(prog)); localStorage.setItem('ielts2_err', JSON.stringify(errLog)); }
+function status(w) { return prog[w.word] || 'new'; }
+
+// Speech
+function doSpeak(word) {
+  const w = word || document.getElementById('fc-word').textContent;
+  if (!w || w === '完成！') return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(w);
+  u.lang = 'en-US'; u.rate = 0.85;
+  const btn = document.getElementById('speak-btn');
+  u.onstart = () => { if (btn) btn.classList.add('on'); };
+  u.onend = () => { if (btn) btn.classList.remove('on'); };
+  speechSynthesis.speak(u);
+}
+
+// Synonym chip click: pronounce + show translation
+function clickSyn(chip, word) {
+  event.stopPropagation();
+  // Highlight active chip
+  document.querySelectorAll('.syn-chip').forEach(c => c.classList.remove('active'));
+  chip.classList.add('active');
+  // Speak
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(word);
+  u.lang = 'en-US'; u.rate = 0.85;
+  speechSynthesis.speak(u);
+  // Show translation
+  const trans = document.getElementById('syn-trans');
+  const meaning = DICT[word.toLowerCase()];
+  if (meaning) {
+    trans.textContent = word + '：' + meaning;
+  } else {
+    // Try partial match
+    const key = Object.keys(DICT).find(k => k.includes(word.toLowerCase()) || word.toLowerCase().includes(k));
+    trans.textContent = key ? word + '：' + DICT[key] : word + ' · 点击🔊已朗读';
+  }
+}
+
+// Pages
+function showPage(id) {
+  // Save flashcard position before leaving
+  if (document.getElementById('page-flashcard').classList.contains('active') && id !== 'flashcard') {
+    fcSavePos();
+  }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const i = {home:0,flashcard:1,quiz:2,words:3}[id];
+  if (i !== undefined) document.querySelectorAll('.nb')[i].classList.add('active');
+  if (id === 'home') updateStats();
+  if (id === 'flashcard') buildFC();
+  if (id === 'words') renderWL();
+}
+
+// Stats
+function updateStats() {
+  const total = WORDS.length;
+  const bycat = {1:{t:0,m:0}, 2:{t:0,m:0}, 3:{t:0,m:0}};
+  let mastered = 0, learning = 0;
+  const wfc = {all:total,'1':0,'2':0,'3':0,mastered:0,learning:0,new:0};
+
+  WORDS.forEach(w => {
+    const s = status(w);
+    bycat[w.cat].t++; wfc[String(w.cat)]++;
+    if (s === 'mastered') { mastered++; bycat[w.cat].m++; wfc.mastered++; }
+    else if (s === 'learning') { learning++; wfc.learning++; }
+    else { wfc.new++; }
+  });
+
+  document.getElementById('st-total').textContent = total;
+  document.getElementById('st-mastered').textContent = mastered;
+  document.getElementById('st-learning').textContent = learning;
+  document.getElementById('st-new').textContent = total - mastered - learning;
+  document.getElementById('prog-fill').style.width = (mastered/total*100).toFixed(1) + '%';
+
+  [1,2,3].forEach(c => {
+    const {t,m} = bycat[c];
+    document.getElementById('cs'+c+'-fill').style.width = t ? (m/t*100).toFixed(1)+'%' : '0%';
+    document.getElementById('cs'+c+'-nums').textContent = m+' / '+t+' 已掌握';
+  });
+
+  [['all','all'],['1','1'],['2','2'],['3','3'],['m','mastered'],['l','learning'],['n','new']].forEach(([id,key]) => {
+    const el = document.getElementById('wfc-'+id);
+    if (el) el.textContent = wfc[key] || 0;
+  });
+
+  const div = document.getElementById('err-log');
+  const btnDrill = document.getElementById('btn-err-drill');
+  if (!errLog.length) {
+    div.innerHTML = '<div class="empty">暂无错题</div>';
+    if (btnDrill) btnDrill.style.display = 'none';
+    const card = document.getElementById('err-ans-card');
+    if (card) { card.style.display = 'none'; card.innerHTML = ''; }
+  } else {
+    if (btnDrill) btnDrill.style.display = '';
+    div.innerHTML = '<div style="display:flex;flex-wrap:wrap;gap:6px">' +
+      errLog.slice(-18).reverse().map(w =>
+        `<span onclick="showErrAns('${w.replace(/'/g,"\\'")}',this)" style="padding:4px 12px;background:var(--card);border:1px solid var(--red);border-radius:6px;font-size:12px;color:var(--red);cursor:pointer;transition:all .15s" onmouseenter="this.style.borderColor='var(--yellow)';this.style.color='var(--yellow)'" onmouseleave="this.style.borderColor='var(--red)';this.style.color='var(--red)'">${w}</span>`
+      ).join('') + '</div>';
+  }
+}
+
+// Flashcard
+let fcList = [], fcIdx = 0, fcCat = 'all', fcSt = 'all';
+
+function fcSavePos() {
+  sessionStorage.setItem('fc_key', fcCat + '_' + fcSt);
+  sessionStorage.setItem('fc_idx', fcIdx);
+  // save word at current position so we can re-anchor after list changes
+  if (fcList[fcIdx]) sessionStorage.setItem('fc_word', fcList[fcIdx].word);
+}
+
+function goFC(cat, st) {
+  fcCat = cat; fcSt = st;
+  document.querySelectorAll('#page-flashcard .pill[data-cat]').forEach(p => p.classList.toggle('active', p.dataset.cat === cat));
+  document.querySelectorAll('#page-flashcard .pill[data-st]').forEach(p => p.classList.toggle('active', p.dataset.st === st));
+  buildFC(); showPage('flashcard');
+}
+function fcSetCat(btn) {
+  document.querySelectorAll('#page-flashcard .pill[data-cat]').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active'); fcCat = btn.dataset.cat; buildFC();
+}
+function fcSetSt(btn) {
+  document.querySelectorAll('#page-flashcard .pill[data-st]').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active'); fcSt = btn.dataset.st; buildFC();
+}
+function buildFC() {
+  fcList = WORDS.filter(w => {
+    const cOk = fcCat === 'all' || String(w.cat) === fcCat;
+    // 'all' 模式自动排除已掌握，让已掌握不重复出现；可选 '已掌握' 筛选器来专项复习
+    const s = status(w);
+    const sOk = fcSt === 'all' ? s !== 'mastered' : s === fcSt;
+    return cOk && sOk;
+  });
+
+  // 尝试恢复上次位置
+  const savedKey = sessionStorage.getItem('fc_key');
+  const savedWord = sessionStorage.getItem('fc_word');
+  const savedIdx = parseInt(sessionStorage.getItem('fc_idx') || '0');
+  if (savedKey === fcCat + '_' + fcSt) {
+    // 先尝试按单词锚定（列表可能因标记而变化）
+    const anchor = fcList.findIndex(w => w.word === savedWord);
+    fcIdx = anchor >= 0 ? anchor : (savedIdx < fcList.length ? savedIdx : 0);
+  } else {
+    fcIdx = 0;
+  }
+
+  if (!fcList.length) {
+    toast(fcSt === 'all' ? '🎉 全部已掌握！可切换到「已掌握」复习' : '没有符合条件的单词');
+    return;
+  }
+  showCard();
+}
+function showCard() {
+  const card = document.getElementById('fc-card');
+  card.classList.remove('flipped');
+  document.getElementById('card-marks').style.display = 'none';
+  document.getElementById('syn-trans').textContent = '';
+
+  if (fcIdx >= fcList.length) {
+    document.getElementById('fc-word').textContent = '完成！';
+    document.getElementById('fc-meaning').textContent = '本轮结束';
+    document.getElementById('fc-syns').innerHTML = '';
+    ['fc-badge-f','fc-badge-b','fc-num-f','fc-num-b'].forEach(id => document.getElementById(id).innerHTML = '');
+    document.getElementById('fc-prog').textContent = fcList.length + ' / ' + fcList.length;
+    return;
+  }
+  const w = fcList[fcIdx];
+  const badge = `<span class="cat-badge cb${w.cat}">${w.cat}类</span>`;
+  document.getElementById('fc-badge-f').innerHTML = badge;
+  document.getElementById('fc-badge-b').innerHTML = badge;
+  const numStr = (fcIdx+1) + ' / ' + fcList.length;
+  document.getElementById('fc-num-f').textContent = numStr;
+  document.getElementById('fc-num-b').textContent = numStr;
+  document.getElementById('fc-word').textContent = w.word;
+  document.getElementById('fc-meaning').textContent = w.meaning || '—';
+
+  // Synonym chips — clickable with pronunciation + translation
+  const syns = w.synonyms ? w.synonyms.split(';').filter(s => s.trim()) : [];
+  document.getElementById('fc-syns').innerHTML = syns.map(s => {
+    const sw = s.trim();
+    const esc = sw.replace(/\\/g,'\\\\').replace(/'/g,"\'");
+    return `<span class="syn-chip" onclick="clickSyn(this,'${esc}')"><span class="chip-icon">🔊</span>${sw}</span>`;
+  }).join('');
+
+  document.getElementById('fc-prog').textContent = (fcIdx+1) + ' / ' + fcList.length + '  ·  ' + stLabel(status(w));
+
+  if (document.getElementById('auto-speak').checked) {
+    setTimeout(() => doSpeak(w.word), 200);
+  }
+}
+function fcFlip() {
+  if (fcIdx >= fcList.length) return;
+  document.getElementById('fc-card').classList.toggle('flipped');
+  const flipped = document.getElementById('fc-card').classList.contains('flipped');
+  document.getElementById('card-marks').style.display = flipped ? 'flex' : 'none';
+}
+function fcMark(s) {
+  if (fcIdx >= fcList.length) return;
+  const w = fcList[fcIdx];
+  prog[w.word] = s;
+  if (s === 'new') { errLog = errLog.filter(e => e !== w.word); errLog.push(w.word); if (errLog.length > 60) errLog.shift(); }
+  if (s === 'mastered' && fcSt === 'all') {
+    // 立即从当前列表移除，不再出现
+    fcList.splice(fcIdx, 1);
+    if (fcIdx >= fcList.length) fcIdx = Math.max(0, fcList.length - 1);
+  } else {
+    fcIdx++;
+  }
+  save(); fcSavePos(); showCard(); updateStats();
+}
+function fcPrev() {
+  if (fcIdx <= 0) { toast('已是第一张'); return; }
+  fcIdx--;
+  document.getElementById('fc-card').classList.remove('flipped');
+  document.getElementById('card-marks').style.display = 'none';
+  fcSavePos(); showCard();
+}
+function fcNext() {
+  if (fcIdx >= fcList.length - 1) { toast('已是最后一张'); return; }
+  fcIdx++;
+  document.getElementById('fc-card').classList.remove('flipped');
+  document.getElementById('card-marks').style.display = 'none';
+  fcSavePos(); showCard();
+}
+function fcShuffle() {
+  for (let i=fcList.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fcList[i],fcList[j]]=[fcList[j],fcList[i]];}
+  fcIdx=0; showCard(); toast('已随机排序');
+}
+function fcReset() { fcIdx = 0; sessionStorage.removeItem('fc_key'); showCard(); }
+
+// Quiz
+let qT='w2m', qM='choice', qC='all', qS='all', qList=[], qIdx=0, qOK=0, qNG=0;
+
+function qSetOpt(btn, key) {
+  btn.closest('.q-opts').querySelectorAll('.qo').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (key === 't') qT = btn.dataset.t;
+  if (key === 'm') qM = btn.dataset.m;
+  if (key === 'c') qC = btn.dataset.c;
+  if (key === 's') qS = btn.dataset.s;
+}
+
+function qStart() {
+  let pool = WORDS.filter(w => {
+    const cOk = qC === 'all' || String(w.cat) === qC;
+    const sOk = qS === 'all' || status(w) === qS;
+    return cOk && sOk;
+  });
+  if (qT === 'w2m') pool = pool.filter(w => w.meaning);
+  if (qT === 'w2s') pool = pool.filter(w => w.synonyms);
+  const minNeeded = qM === 'choice' ? 4 : 1;
+  if (pool.length < minNeeded) { toast(minNeeded === 4 ? '该范围单词不足4个' : '没有符合条件的单词'); return; }
+  qList = [...pool].sort(() => Math.random() - .5);
+  qIdx = 0; qOK = 0; qNG = 0;
+  document.getElementById('qz-setup').style.display = 'none';
+  document.getElementById('qz-game').style.display = 'block';
+  document.getElementById('qz-result').style.display = 'none';
+  renderQ();
+}
+
+// Build prompt/correct/getC for current question type
+function qBuild(w) {
+  if (qT === 'w2m') return { prompt: w.word, hint: '写出或选择正确含义', correct: w.meaning, getC: x => x.meaning, placeholder: '输入该单词的含义...' };
+  if (qT === 'm2w') return { prompt: w.meaning, hint: '写出或选择对应单词', correct: w.word, getC: x => x.word, placeholder: '输入对应的英文单词...' };
+  // w2s
+  const syns = (w.synonyms || '').split(';').map(s => s.trim()).filter(Boolean);
+  return { prompt: w.word, hint: '写出或选择一个同义词', correct: syns[0] || '', syns, getC: x => (x.synonyms || '').split(';')[0].trim(), placeholder: '输入任意一个同义词...' };
+}
+
+function renderQ() {
+  if (qIdx >= qList.length) { showResult(); return; }
+  const w = qList[qIdx];
+  document.getElementById('qc').textContent = qOK;
+  document.getElementById('qw').textContent = qNG;
+  document.getElementById('qr').textContent = qList.length - qIdx;
+  document.getElementById('q-fb').className = 'q-fb';
+  document.getElementById('q-next').style.display = 'none';
+
+  const { prompt, hint, correct, getC, placeholder } = qBuild(w);
+  document.getElementById('q-word').textContent = prompt;
+  document.getElementById('q-hint').textContent = hint;
+
+  const isFill = qM === 'fill';
+  document.getElementById('q-choices').style.display = isFill ? 'none' : '';
+  document.getElementById('spell-wrap').style.display = isFill ? 'block' : 'none';
+
+  if (isFill) {
+    const container = document.getElementById('spell-inputs-wrap');
+    container.innerHTML = '';
+
+    // w2s: 每个同义词一个框；其他题型一个框
+    const syns = qT === 'w2s'
+      ? (w.synonyms || '').split(';').map(s => s.trim()).filter(Boolean)
+      : null;
+    const boxCount = syns ? syns.length : 1;
+
+    for (let i = 0; i < boxCount; i++) {
+      if (syns) {
+        const lbl = document.createElement('div');
+        lbl.className = 'spell-label';
+        lbl.textContent = `同义词 ${i + 1} / ${boxCount}`;
+        container.appendChild(lbl);
+      }
+      const inp = document.createElement('input');
+      inp.type = 'text';
+      inp.className = 'spell-input';
+      inp.placeholder = syns ? '输入同义词...' : placeholder;
+      inp.autocomplete = 'off';
+      inp.spellcheck = false;
+      inp.dataset.idx = i;
+      inp.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+          // Enter 跳到下一个框，最后一个框提交
+          const boxes = container.querySelectorAll('input');
+          const next = boxes[i + 1];
+          if (next) next.focus(); else checkSpell();
+        }
+      });
+      container.appendChild(inp);
+    }
+
+    const hintMap = {
+      w2m: '输入含义或任意英文同义词',
+      m2w: '输入对应的英文单词',
+      w2s: `共 ${boxCount} 个同义词，每格填一个，顺序不限，允许 1-2 个拼写误差`,
+    };
+    document.getElementById('spell-hint').textContent = hintMap[qT] || 'Enter 提交';
+    setTimeout(() => container.querySelector('input')?.focus(), 50);
+    return;
+  }
+
+  // Choice mode
+  const pool = WORDS.filter(x => x.word !== w.word && getC(x) && getC(x) !== correct);
+  const wrongs = [], used = new Set([correct]);
+  [...pool].sort(() => Math.random() - .5).forEach(x => {
+    if (wrongs.length >= 3) return;
+    const c = getC(x);
+    if (c && !used.has(c)) { used.add(c); wrongs.push(c); }
+  });
+  const choices = [correct, ...wrongs].sort(() => Math.random() - .5);
+  document.getElementById('q-choices').innerHTML = choices.map(c =>
+    `<button class="q-choice" data-ans="${encodeURIComponent(c)}">${c}</button>`
+  ).join('');
+  document.querySelectorAll('.q-choice').forEach(btn => {
+    btn.addEventListener('click', () => checkQ(btn, decodeURIComponent(btn.dataset.ans), correct, w.word));
+  });
+}
+
+function checkQ(btn, chosen, correct, wkey) {
+  document.querySelectorAll('.q-choice').forEach(b => b.classList.add('dis'));
+  const fb = document.getElementById('q-fb');
+  if (chosen === correct) {
+    btn.classList.add('correct'); fb.textContent = '正确！'; fb.className = 'q-fb show correct'; qOK++;
+    if (prog[wkey] !== 'mastered') prog[wkey] = 'learning';
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.q-choice').forEach(b => { if (decodeURIComponent(b.dataset.ans) === correct) b.classList.add('correct'); });
+    fb.textContent = '错误，正确答案：' + correct; fb.className = 'q-fb show wrong'; qNG++;
+    prog[wkey] = 'learning';
+    errLog = errLog.filter(e => e !== wkey); errLog.push(wkey); if (errLog.length > 60) errLog.shift();
+  }
+  save();
+  document.getElementById('qc').textContent = qOK;
+  document.getElementById('qw').textContent = qNG;
+  document.getElementById('q-next').style.display = 'inline-block';
+}
+
+// Levenshtein distance
+function editDist(a, b) {
+  const m = a.length, n = b.length;
+  const dp = Array.from({length: m + 1}, (_, i) => Array.from({length: n + 1}, (_, j) => i === 0 ? j : j === 0 ? i : 0));
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+  return dp[m][n];
+}
+
+// Fuzzy match: exact OR normalized OR within edit distance tolerance
+function fuzzyMatch(target, typed) {
+  if (!target || !typed) return false;
+  const norm = s => s.replace(/\s+/g, ' ').trim().toLowerCase();
+  const t = norm(target), u = norm(typed);
+  if (t === u) return true;
+  // Allow 1 error for ≤6 chars, 2 errors for longer
+  const tol = t.length <= 6 ? 1 : 2;
+  return editDist(t, u) <= tol;
+}
+
+function checkSpell() {
+  if (qIdx >= qList.length) return;
+  const w = qList[qIdx];
+  const container = document.getElementById('spell-inputs-wrap');
+  const inputs = Array.from(container.querySelectorAll('input'));
+  if (!inputs.length) return;
+
+  const allTyped = inputs.map(inp => inp.value.trim());
+  if (allTyped.every(v => !v)) return;
+
+  const allSyns = (w.synonyms || '').split(';').map(s => s.trim()).filter(Boolean);
+  const fb = document.getElementById('q-fb');
+  let overallOk = false;
+
+  if (qT === 'w2s') {
+    // 每个框匹配一个同义词，顺序不限，用 fuzzy match
+    const usedSyn = new Set();
+    let allBoxOk = true;
+
+    inputs.forEach(inp => {
+      inp.disabled = true;
+      const typed = inp.value.trim();
+      if (!typed) { inp.className = 'spell-input no'; allBoxOk = false; return; }
+      // Find a not-yet-used synonym that fuzzy-matches
+      const matchIdx = allSyns.findIndex((s, i) => !usedSyn.has(i) && fuzzyMatch(s, typed));
+      if (matchIdx >= 0) {
+        usedSyn.add(matchIdx);
+        inp.className = 'spell-input ok';
+      } else {
+        inp.className = 'spell-input no';
+        allBoxOk = false;
+      }
+    });
+
+    overallOk = allBoxOk && usedSyn.size === allSyns.length;
+    if (overallOk) {
+      fb.textContent = '全部正确！✓'; fb.className = 'q-fb show correct'; qOK++;
+      if (prog[w.word] !== 'mastered') prog[w.word] = 'learning';
+    } else {
+      const ref = allSyns.join(' / ');
+      fb.textContent = '有误！参考答案：' + ref; fb.className = 'q-fb show wrong'; qNG++;
+      prog[w.word] = 'learning';
+      errLog = errLog.filter(e => e !== w.word); errLog.push(w.word); if (errLog.length > 60) errLog.shift();
+    }
+
+  } else {
+    // w2m / m2w：单框，fuzzy match
+    const inp = inputs[0];
+    inp.disabled = true;
+    const typed = inp.value.trim();
+
+    let accepted = [];
+    let refAnswer = '';
+    if (qT === 'w2m') {
+      accepted = [w.meaning, ...allSyns, w.word];
+      refAnswer = w.meaning + (allSyns.length ? '  |  ' + allSyns.slice(0, 3).join(' / ') : '');
+    } else {
+      accepted = [w.word, ...allSyns];
+      refAnswer = w.word + (allSyns.length ? ' / ' + allSyns.slice(0, 2).join(' / ') : '');
+    }
+
+    overallOk = accepted.some(a => fuzzyMatch(a, typed));
+    if (overallOk) {
+      inp.className = 'spell-input ok';
+      fb.textContent = '正确！✓'; fb.className = 'q-fb show correct'; qOK++;
+      if (prog[w.word] !== 'mastered') prog[w.word] = 'learning';
+    } else {
+      inp.className = 'spell-input no';
+      fb.textContent = '差一点！参考：' + refAnswer; fb.className = 'q-fb show wrong'; qNG++;
+      prog[w.word] = 'learning';
+      errLog = errLog.filter(e => e !== w.word); errLog.push(w.word); if (errLog.length > 60) errLog.shift();
+    }
+  }
+
+  save();
+  document.getElementById('qc').textContent = qOK;
+  document.getElementById('qw').textContent = qNG;
+  document.getElementById('q-next').style.display = 'inline-block';
+}
+
+function qNext() { qIdx++; renderQ(); }
+function showResult(){
+  document.getElementById('qz-game').style.display='none';
+  document.getElementById('qz-result').style.display='block';
+  const tot=qOK+qNG,pct=tot?Math.round(qOK/tot*100):0;
+  document.getElementById('q-emoji').textContent=pct>=80?'🎉':pct>=60?'💪':'📚';
+  document.getElementById('q-rt').textContent='得分 '+pct+'%';
+  document.getElementById('q-rs').textContent='共'+tot+'题，答对'+qOK+'，答错'+qNG;
+  updateStats();
+}
+function qShowSetup(){
+  document.getElementById('qz-setup').style.display='block';
+  document.getElementById('qz-game').style.display='none';
+  document.getElementById('qz-result').style.display='none';
+}
+
+// Word list
+let wlF='all';
+function setWF(btn){document.querySelectorAll('.wf').forEach(b=>b.classList.remove('active'));btn.classList.add('active');wlF=btn.dataset.f;renderWL();}
+function renderWL(){
+  const q=(document.getElementById('wl-q')?.value||'').toLowerCase();
+  const list=WORDS.filter(w=>{
+    const fOk=wlF==='all'||String(w.cat)===wlF||(wlF==='mastered'&&status(w)==='mastered')||(wlF==='learning'&&status(w)==='learning')||(wlF==='new'&&status(w)==='new');
+    const sOk=!q||w.word.toLowerCase().includes(q)||w.meaning.includes(q)||w.synonyms.toLowerCase().includes(q);
+    return fOk&&sOk;
+  });
+  const body=document.getElementById('wl-body');
+  if(!list.length){body.innerHTML='<div class="empty">没有匹配的单词</div>';return;}
+  body.innerHTML=list.map(w=>{
+    const s=status(w);
+    const we=w.word.replace(/'/g,"\'");
+    return `<div class="wrow">
+      <div style="color:var(--muted);font-size:11px">${w.num}</div>
+      <div><span class="cat-badge cb${w.cat}">${w.cat}类</span></div>
+      <div class="ww">${w.word}<button class="sm" onclick="doSpeak('${we}')" title="朗读">🔊</button></div>
+      <div class="wm">${w.meaning}</div>
+      <div class="ws">${w.synonyms}</div>
+      <div class="wst"><span class="sdot ${s}"></span>${stLabel(s)}</div>
+    </div>`;
+  }).join('');
+}
+function stLabel(s){return s==='mastered'?'掌握':s==='learning'?'学习中':'未学';}
+function doReset(){if(!confirm('确定重置所有进度？'))return;prog={};errLog=[];save();updateStats();toast('已重置');}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+
+// Error word answer reveal
+function showErrAns(word, chip) {
+  const card = document.getElementById('err-ans-card');
+  // toggle off if same word clicked again
+  if (card._current === word && card.style.display !== 'none') {
+    card.style.display = 'none'; card._current = null;
+    document.querySelectorAll('#err-log span').forEach(s => s.style.fontWeight = '');
+    return;
+  }
+  document.querySelectorAll('#err-log span').forEach(s => s.style.fontWeight = '');
+  chip.style.fontWeight = '700';
+  card._current = word;
+  const w = WORDS.find(x => x.word === word);
+  const meaning = w ? w.meaning : '—';
+  const syns = w && w.synonyms ? w.synonyms.split(';').map(s => s.trim()).filter(Boolean) : [];
+  card.innerHTML = `<div class="err-ans-card">
+    <div class="err-ans-word">${word}</div>
+    <div class="err-ans-meaning">${meaning}</div>
+    ${syns.length ? '<div class="err-ans-syns">' + syns.map(s => `<span class="err-ans-syn">${s}</span>`).join('') + '</div>' : ''}
+  </div>`;
+  card.style.display = 'block';
+}
+
+// 错词重刷默写
+let erdList = [], erdIdx = 0, erdOK = 0, erdNG = 0;
+
+function goErrDrill() {
+  if (!errLog.length) { toast('暂无错词'); return; }
+  startErrDrill();
+}
+
+function startErrDrill() {
+  erdList = errLog.slice().reverse().map(w => WORDS.find(x => x.word === w)).filter(Boolean);
+  erdIdx = 0; erdOK = 0; erdNG = 0;
+  document.getElementById('erd-main').style.display = '';
+  document.getElementById('erd-result').style.display = 'none';
+  showPage('errdrill');
+  renderErdCard();
+}
+
+function renderErdCard() {
+  if (erdIdx >= erdList.length) { showErdResult(); return; }
+  const w = erdList[erdIdx];
+  const syns = (w.synonyms || '').split(';').map(s => s.trim()).filter(Boolean);
+  document.getElementById('erd-prog').textContent = (erdIdx + 1) + ' / ' + erdList.length;
+  document.getElementById('erd-word').textContent = w.word;
+  const fb = document.getElementById('erd-fb');
+  fb.className = 'err-drill-fb';
+  fb.textContent = '';
+  document.getElementById('erd-submit').style.display = '';
+  document.getElementById('erd-next').style.display = 'none';
+
+  const wrap = document.getElementById('erd-inputs');
+  wrap.innerHTML = '';
+  syns.forEach((_, i) => {
+    const lbl = document.createElement('div');
+    lbl.className = 'spell-label';
+    lbl.textContent = '同义词 ' + (i + 1) + ' / ' + syns.length;
+    wrap.appendChild(lbl);
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'spell-input';
+    inp.placeholder = '输入同义词...';
+    inp.autocomplete = 'off';
+    inp.spellcheck = false;
+    inp.dataset.idx = i;
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const boxes = wrap.querySelectorAll('input');
+        const next = boxes[i + 1];
+        if (next) next.focus(); else checkErdSpell();
+      }
+    });
+    wrap.appendChild(inp);
+  });
+
+  document.getElementById('erd-hint').textContent = syns.length + ' 个同义词，顺序不限，允许 1-2 个拼写误差';
+  setTimeout(() => wrap.querySelector('input')?.focus(), 50);
+}
+
+function checkErdSpell() {
+  const w = erdList[erdIdx];
+  const syns = (w.synonyms || '').split(';').map(s => s.trim()).filter(Boolean);
+  const inputs = Array.from(document.getElementById('erd-inputs').querySelectorAll('input'));
+  const fb = document.getElementById('erd-fb');
+
+  const usedSyn = new Set();
+  let allOk = true;
+  inputs.forEach(inp => {
+    inp.disabled = true;
+    const typed = inp.value.trim();
+    if (!typed) { inp.className = 'spell-input no'; allOk = false; return; }
+    const matchIdx = syns.findIndex((s, i) => !usedSyn.has(i) && fuzzyMatch(s, typed));
+    if (matchIdx >= 0) { usedSyn.add(matchIdx); inp.className = 'spell-input ok'; }
+    else { inp.className = 'spell-input no'; allOk = false; }
+  });
+  if (usedSyn.size < syns.length) allOk = false;
+
+  document.getElementById('erd-submit').style.display = 'none';
+  document.getElementById('erd-next').style.display = '';
+
+  if (allOk) {
+    fb.textContent = '全部正确！已从错词中移除';
+    fb.className = 'err-drill-fb show correct';
+    erdOK++;
+    errLog = errLog.filter(e => e !== w.word);
+    save(); updateStats();
+  } else {
+    fb.textContent = '未完全正确，参考答案：' + syns.join(' / ');
+    fb.className = 'err-drill-fb show wrong';
+    erdNG++;
+  }
+}
+
+function erdNext() {
+  erdIdx++;
+  renderErdCard();
+}
+
+function showErdResult() {
+  document.getElementById('erd-main').style.display = 'none';
+  document.getElementById('erd-result').style.display = 'block';
+  const tot = erdOK + erdNG;
+  const pct = tot ? Math.round(erdOK / tot * 100) : 0;
+  document.getElementById('erd-emoji').textContent = pct >= 80 ? '🎉' : pct >= 50 ? '💪' : '📚';
+  document.getElementById('erd-rt').textContent = '得分 ' + pct + '%';
+  document.getElementById('erd-rs').textContent = '共 ' + tot + ' 个，全对 ' + erdOK + ' 个，有误 ' + erdNG + ' 个';
+  updateStats();
+}
+
+document.addEventListener('DOMContentLoaded', () => { updateStats(); });
+</script>
+</body>
+</html>
